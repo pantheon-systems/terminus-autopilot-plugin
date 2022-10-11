@@ -1,6 +1,6 @@
 {
     "name": "pantheon-systems/terminus-autopilot-plugin",
-    "description": "Terminus Autopilot commands.",
+    "description": "Configure and manage Autopilot via Terminus commands.",
     "type": "terminus-plugin",
     "license": "MIT",
     "autoload": {
