@@ -31,14 +31,14 @@ class FrequencySetCommand extends AutopilotCommandBase implements RequestAwareIn
      *  Available options: MANUAL, MONTHLY, WEEKLY, DAILY.
      * @param array $options
      *
-     * @return mixed
+     * @return bool
      * @throws \Pantheon\Terminus\Exceptions\TerminusException|\GuzzleHttp\Exception\GuzzleException
      */
     public function autopilotFrequencySet(
         string $site_id,
         string $frequency,
         array $options = ['debug' => false]
-    ) {
+    ): bool {
 
         // Allow frequency to be case-insensitive for user friendliness.
         $frequency = strtoupper($frequency);
