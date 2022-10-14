@@ -9,12 +9,15 @@ use Pantheon\Terminus\Commands\TerminusCommand;
  */
 class TerminateCommand extends TerminusCommand
 {
-  /**
-   * @param $site_id
-   * @param array $options
-   * @return void
-   */
-  public function terminate($site_id, array $options = ['debug' => false,]) {
 
-  }
+    /**
+     * @param $site_id
+     * @param array $options
+     *
+     * @return void
+     */
+    public function terminate($site_id, array $options = ['debug' => false,])
+    {
+
+    }
 }

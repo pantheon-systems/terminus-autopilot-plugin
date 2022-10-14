@@ -9,12 +9,15 @@ use Pantheon\Terminus\Commands\TerminusCommand;
  */
 class InitializeCommand extends TerminusCommand
 {
-  /**
-   * @param $site_id
-   * @param array $options
-   * @return void
-   */
-  public function initialize($site_id, array $options = ['debug' => false,]) {
 
-  }
+    /**
+     * @param $site_id
+     * @param array $options
+     *
+     * @return void
+     */
+    public function initialize($site_id, array $options = ['debug' => false,])
+    {
+
+    }
 }

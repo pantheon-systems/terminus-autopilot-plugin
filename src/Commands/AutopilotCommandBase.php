@@ -10,26 +10,24 @@ use Pantheon\TerminusAutopilot\Autopilot\AutopilotAwareTrait;
  */
 abstract class AutopilotCommandBase extends TerminusCommand
 {
-  use AutopilotAwareTrait;
 
+    use AutopilotAwareTrait;
 
-  /**
-   * Construct function to pass the required dependencies.
-   */
-  public function __construct()
-  {
-    parent::__construct();
-    $this->autopilotInit();
-  }
+    /**
+     * Construct function to pass the required dependencies.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->autopilotInit();
+    }
 
-  /**
-   * @return void
-   */
-  protected function setupRequest()
-  {
-    $this->secretsApi()->setRequest($this->request());
-  }
-
-
+    /**
+     * @return void
+     */
+    protected function setupRequest()
+    {
+        $this->apiClient()->setRequest($this->request());
+    }
 
 }
