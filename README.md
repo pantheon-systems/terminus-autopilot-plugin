@@ -1,4 +1,4 @@
-# Terminus Plugin Example
+# Terminus Autopilot Plugin 
 
 [![CircleCI](https://circleci.com/gh/pantheon-systems/terminus-plugin-example.svg?style=shield)](https://circleci.com/gh/pantheon-systems/terminus-autopilot-plugin)
 [![Terminus v3.x Compatible](https://img.shields.io/badge/terminus-3.x-green.svg)](https://github.com/pantheon-systems/terminus-autopilot-plugin)
