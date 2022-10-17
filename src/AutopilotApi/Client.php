@@ -37,7 +37,7 @@ class Client
      */
     public function getSettings(string $site_id): array
     {
-        return $this->requestApi($site_id);
+        return $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id));
     }
 
     /**
@@ -62,7 +62,7 @@ class Client
             'method' => 'POST',
         ];
 
-        $this->requestApi($site_id, $request_options);
+        $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id), $request_options);
     }
 
     /**
@@ -93,7 +93,7 @@ class Client
             'method' => 'POST',
         ];
 
-        $this->requestApi($site_id, $request_options);
+        $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id), $request_options);
     }
 
     /**
@@ -114,7 +114,7 @@ class Client
     /**
      * Performs the request to API path.
      *
-     * @param string $site_id
+     * @param string $path
      * @param array $options
      *
      * @return array
@@ -122,9 +122,9 @@ class Client
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
      */
-    public function requestApi(string $site_id, array $options = []): array
+    public function requestApi(string $path, array $options = []): array
     {
-        $url = sprintf('%s/sites/%s/vrt/settings', $this->getPantheonApiBaseUri(), $site_id);
+        $url = sprintf('%s/%s', $this->getPantheonApiBaseUri(), $path);
         $options = array_merge(
             [
                 'headers' => [
