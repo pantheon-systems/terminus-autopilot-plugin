@@ -24,7 +24,7 @@ class InitializeCommand extends TerminusCommand implements RequestAwareInterface
      * @authorize
      * @filter-output
      */
-    public function initialize(string $site_id)
+    public function initialize(string $site_id): void
     {
         $site = $this->getSite($site_id);
 
