@@ -17,19 +17,62 @@ class AutopilotEnvSyncingCommand extends TerminusCommand implements RequestAware
     use SiteAwareTrait;
 
     /**
-     * Command to enable/disable environment syncing.
+     * Command to enable environment syncing.
      *
-     * @command autopilot:syncing
+     * @command autopilot:env-sync:enable
+     * @aliases ap-env-sync-en
+     * @authorize
+     * @filter-output
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function envSyncing(string $site_id)
+    public function enableEnvSyncing(string $site_id)
     {
         $site = $this->getSite($site_id);
-        $settings = $this->getClient()->getSettings($site->id);
-        print_r($settings);
+
+        try {
+            $this->getClient()->setEnvSyncing($site_id, true);
+        } catch (\Throwable $t) {
+            $this->log()->error(
+                'Autopilot environment syncing did not successfully enable: {error_message}',
+                ['error_message' => $t->getMessage()]
+            );
+            return;
+        }
+
+        $this->log()->success('Autopilot environment syncing is enabled.');
+    }
+
+    /**
+     * Command to disable environment syncing.
+     *
+     * @command autopilot:env-sync:disable
+     * @aliases ap-env-sync-dis
+     * @authorize
+     * @filter-output
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function disableEnvSyncing(string $site_id)
+    {
+        $site = $this->getSite($site_id);
+
+        try {
+            $this->getClient()->setEnvSyncing($site_id, false);
+        } catch (\Throwable $t) {
+            $this->log()->error(
+                'Autopilot environment syncing did not successfully disable: {error_message}',
+                ['error_message' => $t->getMessage()]
+            );
+            return;
+        }
+
+        $this->log()->success('Autopilot environment syncing is disabled.');
     }
 }
