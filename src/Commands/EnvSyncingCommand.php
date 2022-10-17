@@ -29,7 +29,7 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function enableEnvSyncing(string $site_id)
+    public function enableEnvSyncing(string $site_id): void
     {
         $site = $this->getSite($site_id);
 
@@ -59,7 +59,7 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function disableEnvSyncing(string $site_id)
+    public function disableEnvSyncing(string $site_id): void
     {
         $site = $this->getSite($site_id);
 

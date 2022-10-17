@@ -24,7 +24,7 @@ class TerminateCommand extends TerminusCommand implements RequestAwareInterface,
      * @authorize
      * @filter-output
      */
-    public function terminate(string $site_id)
+    public function terminate(string $site_id): void
     {
         $site = $this->getSite($site_id);
 
