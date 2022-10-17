@@ -13,7 +13,7 @@ class Client
     /**
      * @var \Pantheon\Terminus\Request\Request
      */
-    protected $request;
+    protected Request $request;
 
     /**
      * Constructor.

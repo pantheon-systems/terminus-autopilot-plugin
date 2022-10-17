@@ -16,7 +16,7 @@ trait AutopilotClientAwareTrait
     /**
      * @var \Pantheon\TerminusAutopilot\AutopilotApi\Client
      */
-    protected $autopilotClient;
+    protected Client $autopilotClient;
 
     /**
      * Return the AutopilotApi object.
