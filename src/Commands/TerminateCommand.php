@@ -3,21 +3,31 @@
 namespace Pantheon\TerminusAutopilot\Commands;
 
 use Pantheon\Terminus\Commands\TerminusCommand;
+use Pantheon\Terminus\Request\RequestAwareInterface;
+use Pantheon\Terminus\Site\SiteAwareInterface;
+use Pantheon\Terminus\Site\SiteAwareTrait;
+use Pantheon\TerminusAutopilot\AutopilotApi\AutopilotClientAwareTrait;
 
 /**
- * Autopilot status check.
+ * Class TerminateCommand.
  */
-class TerminateCommand extends TerminusCommand
+class TerminateCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
 {
+    use AutopilotClientAwareTrait;
+    use SiteAwareTrait;
 
     /**
-     * @param $site_id
-     * @param array $options
+     * Command to terminate autopilot.
      *
-     * @return void
+     * @command autopilot:terminate
+     * @aliases ap-terminate
+     * @authorize
+     * @filter-output
      */
-    public function terminate($site_id, array $options = ['debug' => false,])
+    public function terminate(string $site_id)
     {
+        $site = $this->getSite($site_id);
 
+        // @todo: implement
     }
 }
