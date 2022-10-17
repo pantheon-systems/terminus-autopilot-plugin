@@ -32,5 +32,8 @@
         "terminus": {
             "compatible-version": "^1||^2||^3"
         }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7"
     }
 }
