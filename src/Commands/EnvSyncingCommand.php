@@ -9,9 +9,9 @@ use Pantheon\Terminus\Site\SiteAwareTrait;
 use Pantheon\TerminusAutopilot\AutopilotApi\AutopilotClientAwareTrait;
 
 /**
- * Class AutopilotEnvSyncingCommand.
+ * Class EnvSyncingCommand.
  */
-class AutopilotEnvSyncingCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
+class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
 {
     use AutopilotClientAwareTrait;
     use SiteAwareTrait;
