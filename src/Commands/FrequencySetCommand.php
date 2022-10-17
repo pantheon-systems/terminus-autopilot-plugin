@@ -24,6 +24,8 @@ class FrequencySetCommand extends TerminusCommand implements RequestAwareInterfa
      *
      * @command site:autopilot:frequency
      * @aliases ap-frequency-set
+     * @authorize
+     * @filter-output
      *
      * @param string $site_id Long form site ID.
      * @param string $frequency Frequency for Terminus to run.
