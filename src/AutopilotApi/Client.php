@@ -41,6 +41,52 @@ class Client
     }
 
     /**
+     * Sets autopilot frequency setting.
+     *
+     * @param string $site_id
+     * @param string $frequency
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function setFrequency(string $site_id, string $frequency): void
+    {
+        $frequency = strtoupper($frequency);
+        if (!in_array($frequency, $this->getValidFrequencies(), true)) {
+            throw new TerminusException(
+                '"{frequency}" is not a valid frequency value. Valid options are: {valid_frequencies}.',
+                [
+                    'frequency' => $frequency,
+                    'valid_frequencies' => implode(', ', $this->getValidFrequencies())
+                ]
+            );
+        }
+
+        $request_body = ['updateFrequency' => $frequency];
+        $request_options = [
+            'json' => $request_body,
+            'method' => 'POST',
+        ];
+
+        $this->requestApi($site_id, $request_options);
+    }
+
+    /**
+     * Returns the list of valid frequency values.
+     *
+     * @return string[]
+     */
+    protected function getValidFrequencies(): array
+    {
+        return [
+            'MANUAL',
+            'DAILY',
+            'WEEKLY',
+            'MONTHLY',
+        ];
+    }
+
+    /**
      * Performs the request to API path.
      *
      * @param string $site_id
