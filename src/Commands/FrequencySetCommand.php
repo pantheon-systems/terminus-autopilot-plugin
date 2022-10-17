@@ -23,7 +23,7 @@ class FrequencySetCommand extends AutopilotCommandBase implements RequestAwareIn
      * @authorize
      * @filter-output
      *
-     * @command autopilot:frequency:set
+     * @command site:autopilot:frequency
      * @aliases ap-frequency-set
      *
      * @param string $site_id Long form site ID.
