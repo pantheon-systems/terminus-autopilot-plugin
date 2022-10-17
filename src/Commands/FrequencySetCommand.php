@@ -54,7 +54,7 @@ class FrequencySetCommand extends TerminusCommand implements RequestAwareInterfa
 
         $this->log()->success(
             'Autopilot frequency updated to {frequency}.',
-            ['frequency' => $frequency]
+            ['frequency' => strtoupper($frequency)]
         );
     }
 }
