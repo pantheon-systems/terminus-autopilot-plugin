@@ -44,6 +44,31 @@ class Client
      * Sets autopilot frequency setting.
      *
      * @param string $site_id
+     * @param bool $value
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     *
+     * @parame string $value
+     *
+     */
+    public function setEnvSyncing(string $site_id, bool $value): void
+    {
+        $request_body = [
+            'cloneContent' => ['enabled' => $value],
+        ];
+        $request_options = [
+            'json' => $request_body,
+            'method' => 'POST',
+        ];
+
+        $this->requestApi($site_id, $request_options);
+    }
+
+    /**
+     * Sets autopilot frequency setting.
+     *
+     * @param string $site_id
      * @param string $frequency
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
