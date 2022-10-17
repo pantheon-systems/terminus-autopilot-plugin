@@ -2,6 +2,7 @@
 
 namespace Pantheon\TerminusAutopilot\AutopilotApi;
 
+use Pantheon\Terminus\Exceptions\TerminusException;
 use Pantheon\Terminus\Request\Request;
 
 /**
@@ -31,22 +32,47 @@ class Client
      *
      * @return array
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getSettings(string $site_id): array
     {
+        return $this->requestApi($site_id);
+    }
+
+    /**
+     * Performs the request to API path.
+     *
+     * @param string $site_id
+     * @param array $options
+     *
+     * @return array
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function requestApi(string $site_id, array $options = []): array
+    {
         $url = sprintf('%s/sites/%s/vrt/settings', $this->getPantheonApiBaseUri(), $site_id);
-        $options = [
-            'headers' => [
-                'Accept' => 'application/json',
-                'Authorization' => $this->request->session()->get('session'),
+        $options = array_merge(
+            [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Authorization' => $this->request->session()->get('session'),
+                ],
+                // @todo Remove "verify" flag post-EA, once service is using trusted cert.
+                'verify' => false,
             ],
-            // @todo Remove "verify" flag post-EA, once service is using trusted cert.
-            'verify' => false,
-        ];
+            $options
+        );
 
         $result = $this->request->request($url, $options);
+        if ($result->isError()) {
+            throw new TerminusException(
+                'Failed requesting Autopilot API: {reason}',
+                ['reason' => $result->getStatusCodeReason()]
+            );
+        }
 
         return (array) $result->getData();
     }
