@@ -8,10 +8,18 @@ use Pantheon\Terminus\Request\Request;
 use Pantheon\Terminus\Request\RequestOperationResult;
 use Pantheon\Terminus\Session\Session;
 
+/**
+ * Class RequestMock.
+ */
 class RequestMock extends Request
 {
     use MockPayloadAwareTrait;
 
+    /**
+     * @inheritdoc
+     *
+     * @throws \JsonException
+     */
     public function request($path, array $options = []): RequestOperationResult
     {
         $result = array_merge(
