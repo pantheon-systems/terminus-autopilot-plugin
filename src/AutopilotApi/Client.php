@@ -116,6 +116,26 @@ class Client
     }
 
     /**
+     * Returns run frequency setting.
+     *
+     * @param string $site_id
+     *
+     * @return string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function getFrequency(string $site_id): string
+    {
+        $settings = $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id));
+        if (!isset($settings['updateFrequency'])) {
+            throw new TerminusException('Missing "frequency" setting');
+        }
+
+        return $settings['updateFrequency'];
+    }
+
+    /**
      * Sets autopilot frequency setting.
      *
      * @param string $site_id
