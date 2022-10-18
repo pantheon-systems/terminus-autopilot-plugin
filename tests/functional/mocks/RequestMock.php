@@ -10,10 +10,11 @@ use Pantheon\Terminus\Session\Session;
 
 class RequestMock extends Request
 {
+    use MockPayloadAwareTrait;
+
     public function request($path, array $options = []): RequestOperationResult
     {
-        $mock = getenv('TERMINUS_REQUEST_MOCK');
-        return new RequestOperationResult(json_decode($mock, true));
+        return new RequestOperationResult($this->getMockPayload());
     }
 
     public function getConfig()
