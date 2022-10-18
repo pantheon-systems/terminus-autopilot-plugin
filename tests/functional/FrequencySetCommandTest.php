@@ -11,6 +11,6 @@ final class FrequencySetCommandTest extends TerminusTestBase
         $this->assertCommandExists('site:autopilot:frequency');
 
         $r = $this->terminus(sprintf('site:autopilot:frequency %s', $this->getSiteName()), [], false);
-        $this->assertStringContainsString('weekly', $r);
+        $this->assertStringContainsString('daily', $r);
     }
 }
