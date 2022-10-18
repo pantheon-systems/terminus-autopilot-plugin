@@ -66,6 +66,56 @@ class Client
     }
 
     /**
+     * Returns destination environment setting.
+     *
+     * @param string $site_id
+     *
+     * @return string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function getDestination(string $site_id): string
+    {
+        $settings = $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id));
+        if (!isset($settings['deploymentDestination'])) {
+            throw new TerminusException('Missing "destination" setting');
+        }
+
+        return $settings['deploymentDestination'];
+    }
+
+    /**
+     * Sets autopilot destination setting.
+     *
+     * @param string $site_id
+     * @param string $destination
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function setDestination(string $site_id, string $destination): void
+    {
+        if (!in_array($destination, $this->getValidDestinations(), true)) {
+            throw new TerminusException(
+                '"{destination}" is not a valid destination value. Valid options are: {valid_destinations}.',
+                [
+                    'destination' => $destination,
+                    'valid_destinations' => implode(', ', $this->getValidDestinations())
+                ]
+            );
+        }
+
+        $request_body = ['deploymentDestination' => $destination];
+        $request_options = [
+            'json' => $request_body,
+            'method' => 'POST',
+        ];
+
+        $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id), $request_options);
+    }
+
+    /**
      * Sets autopilot frequency setting.
      *
      * @param string $site_id
@@ -94,6 +144,20 @@ class Client
         ];
 
         $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id), $request_options);
+    }
+
+    /**
+     * Returns the list of valid destination values.
+     *
+     * @return string[]
+     */
+    protected function getValidDestinations(): array
+    {
+        return [
+            'dev',
+            'test',
+            'live',
+        ];
     }
 
     /**
