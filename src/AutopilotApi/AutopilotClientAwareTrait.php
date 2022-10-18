@@ -3,6 +3,7 @@
 namespace Pantheon\TerminusAutopilot\AutopilotApi;
 
 use Pantheon\Terminus\Request\RequestAwareTrait;
+use Pantheon\TerminusAutopilot\Tests\Functional\Mocks\RequestMock;
 
 /**
  * Class AutopilotClientAwareTrait.
@@ -27,6 +28,10 @@ trait AutopilotClientAwareTrait
     {
         if (isset($this->autopilotClient)) {
             return $this->autopilotClient;
+        }
+
+        if (getenv('TERMINUS_IS_TESTING_ENV')) {
+            return $this->autopilotClient = new Client(new RequestMock());
         }
 
         return $this->autopilotClient = new Client($this->request());
