@@ -24,20 +24,27 @@ class FrequencySetCommand extends TerminusCommand implements RequestAwareInterfa
      * @authorize
      * @filter-output
      *
+     * @usage <site_id> Get Autopilot run frequency
+     * @usage <site_id> <frequency> Set Autopilot run frequency
+     *
      * @param string $site_id Site name
-     * @param string $frequency Frequency for Terminus to run.
+     * @param string|null $frequency Autopilot run frequency.
      *   Available options: MANUAL, MONTHLY, WEEKLY, DAILY.
      *
-     * @return void
+     * @return string|null
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function autopilotFrequencySet(string $site_id, string $frequency): void
+    public function autopilotFrequencySet(string $site_id, string $frequency = null): ?string
     {
         $site = $this->getSite($site_id);
+
+        if (null === $frequency) {
+            return $this->getClient()->getFrequency($site_id);
+        }
 
         try {
             $this->getClient()->setFrequency($site->id, $frequency);
@@ -46,12 +53,14 @@ class FrequencySetCommand extends TerminusCommand implements RequestAwareInterfa
                 'Autopilot frequency did not successfully update: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
-            return;
+            return null;
         }
 
         $this->log()->success(
             'Autopilot frequency updated to {frequency}.',
             ['frequency' => strtoupper($frequency)]
         );
+
+        return null;
     }
 }
