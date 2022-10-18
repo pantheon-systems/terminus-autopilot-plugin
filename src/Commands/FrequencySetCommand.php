@@ -29,7 +29,7 @@ class FrequencySetCommand extends TerminusCommand implements RequestAwareInterfa
      *
      * @param string $site_id Site name
      * @param string|null $frequency Autopilot run frequency.
-     *   Available options: MANUAL, MONTHLY, WEEKLY, DAILY.
+     *   Available options: manual, monthly, weekly, daily.
      *
      * @return string|null
      *
@@ -58,7 +58,7 @@ class FrequencySetCommand extends TerminusCommand implements RequestAwareInterfa
 
         $this->log()->success(
             'Autopilot frequency updated to {frequency}.',
-            ['frequency' => strtoupper($frequency)]
+            ['frequency' => $frequency]
         );
 
         return null;
