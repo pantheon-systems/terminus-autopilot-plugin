@@ -19,7 +19,7 @@ class TerminateCommand extends TerminusCommand implements RequestAwareInterface,
     /**
      * Command to terminate autopilot.
      *
-     * @command autopilot:terminate
+     * @command site:autopilot:terminate
      * @aliases ap-terminate
      * @authorize
      * @filter-output

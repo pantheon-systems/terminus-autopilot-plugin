@@ -19,7 +19,7 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
     /**
      * Command to enable environment syncing.
      *
-     * @command autopilot:env-sync:enable
+     * @command site:autopilot:env-sync:enable
      * @aliases ap-env-sync-en
      * @authorize
      * @filter-output
@@ -49,7 +49,7 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
     /**
      * Command to disable environment syncing.
      *
-     * @command autopilot:env-sync:disable
+     * @command site:autopilot:env-sync:disable
      * @aliases ap-env-sync-dis
      * @authorize
      * @filter-output

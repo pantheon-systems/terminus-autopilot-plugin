@@ -23,7 +23,7 @@ class FrequencySetCommand extends TerminusCommand implements RequestAwareInterfa
      * @filter-output
      *
      * @command site:autopilot:frequency
-     * @aliases ap-frequency-set
+     * @aliases ap-frequency
      * @authorize
      * @filter-output
      *
