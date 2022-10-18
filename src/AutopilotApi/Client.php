@@ -132,7 +132,7 @@ class Client
             throw new TerminusException('Missing "frequency" setting');
         }
 
-        return $settings['updateFrequency'];
+        return strtolower($settings['updateFrequency']);
     }
 
     /**
@@ -146,7 +146,6 @@ class Client
      */
     public function setFrequency(string $site_id, string $frequency): void
     {
-        $frequency = strtoupper($frequency);
         if (!in_array($frequency, $this->getValidFrequencies(), true)) {
             throw new TerminusException(
                 '"{frequency}" is not a valid frequency value. Valid options are: {valid_frequencies}.',
@@ -157,7 +156,7 @@ class Client
             );
         }
 
-        $request_body = ['updateFrequency' => $frequency];
+        $request_body = ['updateFrequency' => strtoupper($frequency)];
         $request_options = [
             'json' => $request_body,
             'method' => 'POST',
@@ -188,10 +187,10 @@ class Client
     protected function getValidFrequencies(): array
     {
         return [
-            'MANUAL',
-            'DAILY',
-            'WEEKLY',
-            'MONTHLY',
+            'manual',
+            'daily',
+            'weekly',
+            'monthly',
         ];
     }
 
