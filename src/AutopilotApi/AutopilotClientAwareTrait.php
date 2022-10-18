@@ -25,7 +25,7 @@ trait AutopilotClientAwareTrait
      */
     public function getClient(): Client
     {
-        if ($this->autopilotClient) {
+        if (isset($this->autopilotClient)) {
             return $this->autopilotClient;
         }
 
