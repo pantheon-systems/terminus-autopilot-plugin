@@ -1,4 +1,4 @@
-# Terminus Autopilot Plugin 
+# Terminus Autopilot Plugin
 
 [![CircleCI](https://circleci.com/gh/pantheon-systems/terminus-plugin-example.svg?style=shield)](https://circleci.com/gh/pantheon-systems/terminus-autopilot-plugin)
 [![Terminus v3.x Compatible](https://img.shields.io/badge/terminus-3.x-green.svg)](https://github.com/pantheon-systems/terminus-autopilot-plugin)
@@ -31,10 +31,7 @@ This example project includes four testing targets:
 
 * `composer lint`: Syntax-check all php source files.
 * `composer cs`: Code-style check.
-* `composer unit`: Run unit tests with phpunit
-  * No Unit tests currently implemented.
-* `composer functional`: Run functional test with bats
-  * * No Functional tests currently implemented.
+* `composer functional`: Run functional tests.
 To run all tests together, use `composer test`.
 
 Note that prior to running the tests, you should first run:

@@ -2,9 +2,9 @@
 
 namespace Pantheon\TerminusHello\Model;
 
-use PHPUnit\Framework\TestCase;
+use Pantheon\Terminus\Tests\Functional\TerminusTestBase;
 
-final class TerminateCommandTest extends TestCase
+final class TerminateCommandTest extends TerminusTestBase
 {
     public function testTerminateCommand()
     {
