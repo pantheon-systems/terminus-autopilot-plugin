@@ -17,12 +17,19 @@ class TerminateCommand extends TerminusCommand implements RequestAwareInterface,
     use SiteAwareTrait;
 
     /**
-     * Command to terminate autopilot.
+     * Terminate Autopilot.
      *
      * @command site:autopilot:terminate
      * @aliases ap-terminate
      * @authorize
      * @filter-output
+     *
+     * @param string $site_id Site name
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function terminate(string $site_id): void
     {

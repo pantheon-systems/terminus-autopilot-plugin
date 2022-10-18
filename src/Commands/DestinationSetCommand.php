@@ -17,14 +17,15 @@ class DestinationSetCommand extends TerminusCommand implements RequestAwareInter
     use SiteAwareTrait;
 
     /**
-     * Get or set Autopilot destination environment setting for a specific site.
+     * Get or set Autopilot destination environment.
      *
      * @command site:autopilot:destination
      * @aliases ap-destination
      * @authorize
      * @filter-output
-     * @usage <site_id> Get destination environment
-     * @usage <site_id> <destination> Set destination environment
+     *
+     * @usage <site_id> Get Autopilot destination environment
+     * @usage <site_id> <destination> Set Autopilot destination environment
      *
      * @param string $site_id Site name
      * @param string|null $destination The destination environment.

@@ -17,12 +17,19 @@ class InitializeCommand extends TerminusCommand implements RequestAwareInterface
     use SiteAwareTrait;
 
     /**
-     * Command to initialize autopilot.
+     * Initialize Autopilot.
      *
      * @command site:autopilot:initialize
      * @aliases ap-init
      * @authorize
      * @filter-output
+     *
+     * @param string $site_id Site name
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function initialize(string $site_id): void
     {

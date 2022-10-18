@@ -17,17 +17,14 @@ class FrequencySetCommand extends TerminusCommand implements RequestAwareInterfa
     use SiteAwareTrait;
 
     /**
-     * Set Autopilot run frequency for a specific site.
-     *
-     * @authorize
-     * @filter-output
+     * Get or set Autopilot run frequency.
      *
      * @command site:autopilot:frequency
      * @aliases ap-frequency
      * @authorize
      * @filter-output
      *
-     * @param string $site_id Long form site ID.
+     * @param string $site_id Site name
      * @param string $frequency Frequency for Terminus to run.
      *   Available options: MANUAL, MONTHLY, WEEKLY, DAILY.
      *
@@ -38,7 +35,7 @@ class FrequencySetCommand extends TerminusCommand implements RequestAwareInterfa
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function autopilotFrequencySet(string $site_id, string $frequency,): void
+    public function autopilotFrequencySet(string $site_id, string $frequency): void
     {
         $site = $this->getSite($site_id);
 
