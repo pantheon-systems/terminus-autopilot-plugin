@@ -14,7 +14,8 @@ class RequestMock extends Request
 
     public function request($path, array $options = []): RequestOperationResult
     {
-        return new RequestOperationResult($this->getMockPayload());
+        $result = array_merge(['headers' => [], 'status_code_reason' => ''], $this->getMockPayload());
+        return new RequestOperationResult($result);
     }
 
     public function getConfig()

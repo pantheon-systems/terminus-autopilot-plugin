@@ -16,8 +16,6 @@ final class FrequencySetCommandTest extends TerminusTestBase
         $payload = [
             'data' => ['updateFrequency' => 'WEEKLY'],
             'status_code' => 200,
-            'headers' => [],
-            'status_code_reason' => '',
         ];
         $this->setMockPayload($payload);
 
