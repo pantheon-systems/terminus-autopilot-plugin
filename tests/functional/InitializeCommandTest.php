@@ -8,6 +8,6 @@ final class InitializeCommandTest extends TerminusTestBase
 {
     public function testInitializeCommand()
     {
-        $this->markTestSkipped();
+        $this->assertCommandExists('site:autopilot:destination');
     }
 }
