@@ -29,5 +29,4 @@ abstract class AutopilotCommandBase extends TerminusCommand
     {
         $this->apiClient()->setRequest($this->request());
     }
-
 }

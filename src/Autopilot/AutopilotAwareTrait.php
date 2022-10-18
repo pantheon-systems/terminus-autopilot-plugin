@@ -38,5 +38,4 @@ trait AutopilotAwareTrait
     {
         $this->apiClient = $APIClient;
     }
-
 }
