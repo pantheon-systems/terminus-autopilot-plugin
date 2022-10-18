@@ -15,13 +15,13 @@ final class FrequencySetCommandTest extends TerminusTestBase
 
         $payload = [
             'data' => ['updateFrequency' => 'WEEKLY'],
-            'headers' => [],
             'status_code' => 200,
+            'headers' => [],
             'status_code_reason' => '',
         ];
         $this->setMockPayload($payload);
 
-        $r = $this->terminus(sprintf('site:autopilot:frequency %s', $this->getSiteName()), [], false);
-        $this->assertStringContainsString('daily', $r);
+        $result = $this->terminus(sprintf('site:autopilot:frequency %s', $this->getSiteName()), [], false);
+        $this->assertStringContainsString('weekly', $result);
     }
 }
