@@ -11,7 +11,7 @@ final class FrequencySetCommandTest extends TerminusTestBase
         $this->assertCommandExists('site:autopilot:frequency');
 
         $mock = [
-            'data' => ['updateFrequency' => 'DAILY'],
+            'data' => ['updateFrequency' => 'WEEKLY'],
             'headers' => [],
             'status_code' => 200,
             'status_code_reason' => '',
