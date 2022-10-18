@@ -28,7 +28,7 @@ class FrequencySetCommand extends AutopilotCommandBase implements RequestAwareIn
      *
      * @param string $site_id Long form site ID.
      * @param string $frequency Frequency for Terminus to run.
-     *  Available options: MANUAL, MONTHLY, WEEKLY, DAILY.
+     *  Available options: MANUAL, MONTHLY, or WEEKLY.
      * @param array $options
      *
      * @return bool
@@ -45,9 +45,9 @@ class FrequencySetCommand extends AutopilotCommandBase implements RequestAwareIn
 
         // The API will not automatically reject invalid frequencies, so
         // it's best to validate here.
-        if (!in_array($frequency, ['MANUAL', 'MONTHLY', 'WEEKLY', 'DAILY'])) {
+        if (!in_array($frequency, ['MANUAL', 'MONTHLY', 'WEEKLY'])) {
             $error_message = sprintf('%s is not a valid frequency.', $frequency);
-            $this->log()->error($error_message . ' Valid options are: MANUAL, MONTHLY, WEEKLY, or DAILY.');
+            $this->log()->error($error_message . ' Valid options are: MANUAL, MONTHLY, or WEEKLY.');
             return false;
         }
 
