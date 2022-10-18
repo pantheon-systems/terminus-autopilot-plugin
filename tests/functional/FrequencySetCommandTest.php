@@ -27,7 +27,7 @@ final class FrequencySetCommandTest extends TerminusTestBase
         ]);
         $result = $this->terminus(
             sprintf('site:autopilot:frequency %s', $this->getSiteName()),
-            ['2>&1'],
+            [],
             false
         );
         $this->assertStringContainsString('Failed requesting Autopilot API: not found', $result);
