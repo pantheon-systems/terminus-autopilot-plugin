@@ -19,7 +19,7 @@ class InitializeCommand extends TerminusCommand implements RequestAwareInterface
     /**
      * Command to initialize autopilot.
      *
-     * @command autopilot:initialize
+     * @command site:autopilot:initialize
      * @aliases ap-init
      * @authorize
      * @filter-output
