@@ -12,12 +12,8 @@ class RequestMock extends Request
 {
     public function request($path, array $options = []): RequestOperationResult
     {
-        return new RequestOperationResult([
-            'data' => ['updateFrequency' => 'DAILY'],
-            'headers' => [],
-            'status_code' => 200,
-            'status_code_reason' => '',
-        ]);
+        $mock = getenv('TERMINUS_REQUEST_MOCK');
+        return new RequestOperationResult(json_decode($mock, true));
     }
 
     public function getConfig()

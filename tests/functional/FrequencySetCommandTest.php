@@ -10,6 +10,15 @@ final class FrequencySetCommandTest extends TerminusTestBase
     {
         $this->assertCommandExists('site:autopilot:frequency');
 
+        $mock = [
+            'data' => ['updateFrequency' => 'DAILY'],
+            'headers' => [],
+            'status_code' => 200,
+            'status_code_reason' => '',
+        ];
+
+        putenv(sprintf('TERMINUS_REQUEST_MOCK=%s', json_encode($mock)));
+
         $r = $this->terminus(sprintf('site:autopilot:frequency %s', $this->getSiteName()), [], false);
         $this->assertStringContainsString('daily', $r);
     }
