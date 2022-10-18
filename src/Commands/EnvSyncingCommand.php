@@ -17,12 +17,16 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
     use SiteAwareTrait;
 
     /**
-     * Command to enable environment syncing.
+     * Enable Autopilot environment syncing.
      *
      * @command site:autopilot:env-sync:enable
      * @aliases ap-env-sync-en
      * @authorize
      * @filter-output
+     *
+     * @param string $site_id Site name
+     *
+     * @return void
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
@@ -47,12 +51,16 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
     }
 
     /**
-     * Command to disable environment syncing.
+     * Disable Autopilot environment syncing.
      *
      * @command site:autopilot:env-sync:disable
      * @aliases ap-env-sync-dis
      * @authorize
      * @filter-output
+     *
+     * @param string $site_id Site name
+     *
+     * @return void
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
