@@ -1,9 +1,8 @@
 <?php
 
-namespace Pantheon\TerminusHello\Model;
+namespace Pantheon\TerminusAutopilot\Tests\Functional;
 
 use Pantheon\Terminus\Tests\Functional\TerminusTestBase;
-use PHPUnit\Framework\TestCase;
 
 final class FrequencySetCommandTest extends TerminusTestBase
 {
