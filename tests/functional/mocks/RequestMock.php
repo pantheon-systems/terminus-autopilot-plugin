@@ -10,10 +10,10 @@ use Pantheon\Terminus\Session\Session;
 
 class RequestMock extends Request
 {
-    public function request($path, array $options = []) : RequestOperationResult
+    public function request($path, array $options = []): RequestOperationResult
     {
         return new RequestOperationResult([
-            'data' => ['updateFrequency' => 'WEEKLY'],
+            'data' => ['updateFrequency' => 'DAILY'],
             'headers' => [],
             'status_code' => 200,
             'status_code_reason' => '',
@@ -27,7 +27,6 @@ class RequestMock extends Request
 
     public function session()
     {
-        $session_store = new FileStore('/tmp');
-        return new Session($session_store);
+        return new Session(new FileStore('/tmp'));
     }
 }
