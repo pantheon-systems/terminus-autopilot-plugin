@@ -29,5 +29,4 @@ class RequestMock extends Request
         $session_store = new FileStore('/tmp');
         return new Session($session_store);
     }
-
 }
