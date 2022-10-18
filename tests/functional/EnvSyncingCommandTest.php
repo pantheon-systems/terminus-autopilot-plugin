@@ -2,9 +2,9 @@
 
 namespace Pantheon\TerminusHello\Model;
 
-use PHPUnit\Framework\TestCase;
+use Pantheon\Terminus\Tests\Functional\TerminusTestBase;
 
-final class EnvSyncingCommandTest extends TestCase
+final class EnvSyncingCommandTest extends TerminusTestBase
 {
     public function testEnvSyncingCommand()
     {
