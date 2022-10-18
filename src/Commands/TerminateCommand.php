@@ -18,6 +18,5 @@ class TerminateCommand extends TerminusCommand
      */
     public function terminate($site_id, array $options = ['debug' => false,])
     {
-
     }
 }

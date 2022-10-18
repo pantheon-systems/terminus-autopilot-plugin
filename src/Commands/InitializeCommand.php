@@ -18,6 +18,5 @@ class InitializeCommand extends TerminusCommand
      */
     public function initialize($site_id, array $options = ['debug' => false,])
     {
-
     }
 }

@@ -10,8 +10,8 @@
   terminus --version
 }
 
-@test "get help on auth:hello command" {
-  run terminus help auth:hello
-  [[ $output == *"Say hello"* ]]
+@test "Confirm frequency command is enabled." {
+  run terminus help site:autopilot:frequency
+  [[ $output == *"Set Autopilot run frequency for a specific site."* ]]
   [ "$status" -eq 0 ]
 }
