@@ -9,15 +9,20 @@ namespace Pantheon\TerminusAutopilot\Tests\Functional\Mocks;
  */
 trait MockPayloadAwareTrait
 {
+    /**
+     * @return mixed
+     *
+     * @throws \JsonException
+     */
     private function getMockPayload()
     {
         $payload = getenv('TERMINUS_MOCK_PAYLOAD');
-        if (false === $payload) {
-            $payload = [];
-        }
-        return json_decode($payload, true, JSON_THROW_ON_ERROR);
+        return json_decode($payload, true, 512, JSON_THROW_ON_ERROR);
     }
 
+    /**
+     * @param $payload
+     */
     private function setMockPayload($payload)
     {
         putenv(sprintf('TERMINUS_MOCK_PAYLOAD=%s', json_encode($payload)));
