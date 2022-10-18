@@ -2,6 +2,7 @@
 
 namespace Pantheon\TerminusAutopilot\Tests\Functional\Mocks;
 
+use Pantheon\Terminus\Config\TerminusConfig;
 use Pantheon\Terminus\DataStore\FileStore;
 use Pantheon\Terminus\Request\Request;
 use Pantheon\Terminus\Request\RequestOperationResult;
@@ -21,7 +22,7 @@ class RequestMock extends Request
 
     public function getConfig()
     {
-        return [];
+        return new TerminusConfig([]);
     }
 
     public function session()
