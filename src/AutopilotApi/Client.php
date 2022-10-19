@@ -41,7 +41,7 @@ class Client
     }
 
     /**
-     * Sets autopilot frequency setting.
+     * Sets autopilot environment syncing setting.
      *
      * @param string $site_id
      * @param bool $value
