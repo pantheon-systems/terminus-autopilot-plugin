@@ -9,9 +9,9 @@ use Pantheon\Terminus\Site\SiteAwareTrait;
 use Pantheon\TerminusAutopilot\AutopilotApi\AutopilotClientAwareTrait;
 
 /**
- * Class FrequencySetCommand.
+ * Class FrequencyCommand.
  */
-class FrequencySetCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
+class FrequencyCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
 {
     use AutopilotClientAwareTrait;
     use SiteAwareTrait;

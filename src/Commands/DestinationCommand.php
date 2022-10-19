@@ -11,7 +11,7 @@ use Pantheon\TerminusAutopilot\AutopilotApi\AutopilotClientAwareTrait;
 /**
  * Class DestinationSetCommand.
  */
-class DestinationSetCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
+class DestinationCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
 {
     use AutopilotClientAwareTrait;
     use SiteAwareTrait;
