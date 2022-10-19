@@ -5,10 +5,20 @@ namespace Pantheon\TerminusAutopilot\Tests\Functional;
 use Pantheon\Terminus\Tests\Functional\TerminusTestBase;
 use Pantheon\TerminusAutopilot\Tests\Functional\Mocks\MockPayloadAwareTrait;
 
-final class FrequencySetCommandTest extends TerminusTestBase
+/**
+ * Class FrequencyCommandTest.
+ *
+ * @package \Pantheon\TerminusAutopilot\Tests\Functional
+ */
+final class FrequencyCommandTest extends TerminusTestBase
 {
     use MockPayloadAwareTrait;
 
+    /**
+     * @test
+     *
+     * @covers \Pantheon\TerminusAutopilot\Commands\FrequencyCommand::frequency()
+     */
     public function testFrequencySetCommand()
     {
         $this->assertCommandExists('site:autopilot:frequency');
