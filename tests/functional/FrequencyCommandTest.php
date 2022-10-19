@@ -38,5 +38,15 @@ final class FrequencyCommandTest extends TerminusTestBase
         // Set a valid "frequency" setting value.
         $output = $this->terminus(sprintf('site:autopilot:frequency %s monthly', $this->getSiteName()), ['2>&1']);
         $this->assertStringContainsString('Autopilot frequency updated to monthly.', $output);
+
+        // Set an invalid "frequency" setting value.
+        $output = $this->terminus(
+            sprintf('site:autopilot:frequency %s invalid_frequency', $this->getSiteName()),
+            ['2>&1']
+        );
+        $this->assertStringContainsString(
+            'Autopilot frequency did not successfully update: "invalid_frequency" is not a valid frequency value',
+            $output
+        );
     }
 }
