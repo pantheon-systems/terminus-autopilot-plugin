@@ -6,8 +6,6 @@
 
 include_once getenv('HOME') . '/terminus/terminus/vendor/autoload.php';
 
-use Pantheon\Terminus\Tests\Functional\TerminusTestBase;
-
 $tokens_dir = implode(DIRECTORY_SEPARATOR, [$_SERVER['HOME'], '.terminus', 'cache' , 'tokens']);
 if (!is_dir($tokens_dir)) {
     mkdir(
