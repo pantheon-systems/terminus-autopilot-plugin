@@ -188,7 +188,6 @@ class Client
     {
         return [
             'manual',
-            'daily',
             'weekly',
             'monthly',
         ];
