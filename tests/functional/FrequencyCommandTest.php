@@ -48,5 +48,19 @@ final class FrequencyCommandTest extends TerminusTestBase
             'Autopilot frequency did not successfully update: "invalid_frequency" is not a valid frequency value',
             $output
         );
+
+        $this->setMockPayload([
+            'data' => null,
+            'status_code' => 500,
+            'status_code_reason' => 'server error',
+        ]);
+
+        // Get "frequency" setting value for non-200 status from API.
+        $output = $this->terminus(
+            sprintf('site:autopilot:frequency %s', $this->getSiteName()),
+            ['2>&1'],
+            false
+        );
+        $this->assertStringContainsString('Failed requesting Autopilot API: server error', $output);
     }
 }
