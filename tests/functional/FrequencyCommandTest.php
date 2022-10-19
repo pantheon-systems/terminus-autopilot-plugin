@@ -18,6 +18,9 @@ final class FrequencyCommandTest extends TerminusTestBase
      * @test
      *
      * @covers \Pantheon\TerminusAutopilot\Commands\FrequencyCommand::frequency()
+     *
+     * @see \Pantheon\TerminusAutopilot\AutopilotApi\Client::requestApi()
+     * @see \Pantheon\TerminusAutopilot\Tests\Functional\Mocks\RequestMock::request()
      */
     public function testFrequencySetCommand()
     {
@@ -27,9 +30,12 @@ final class FrequencyCommandTest extends TerminusTestBase
             'data' => ['updateFrequency' => 'WEEKLY'],
             'status_code' => 200,
         ]);
+
+        // Get "frequency" setting value.
         $output = $this->terminus(sprintf('site:autopilot:frequency %s', $this->getSiteName()));
         $this->assertEquals('weekly', $output);
 
+        // Set a valid "frequency" setting value.
         $output = $this->terminus(sprintf('site:autopilot:frequency %s monthly', $this->getSiteName()), ['2>&1']);
         $this->assertStringContainsString('Autopilot frequency updated to monthly.', $output);
     }
