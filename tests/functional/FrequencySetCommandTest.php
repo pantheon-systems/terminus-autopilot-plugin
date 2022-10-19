@@ -8,6 +8,6 @@ final class FrequencySetCommandTest extends TerminusTestBase
 {
     public function testFrequencySetCommand()
     {
-        $this->markTestSkipped();
+        $this->assertCommandExists('site:autopilot:frequency');
     }
 }
