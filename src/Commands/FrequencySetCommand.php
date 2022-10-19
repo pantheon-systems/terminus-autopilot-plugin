@@ -38,7 +38,7 @@ class FrequencySetCommand extends TerminusCommand implements RequestAwareInterfa
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function autopilotFrequencySet(string $site_id, string $frequency = null): ?string
+    public function frequency(string $site_id, string $frequency = null): ?string
     {
         $site = $this->getSite($site_id);
 
