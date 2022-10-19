@@ -21,5 +21,7 @@ final class EnvSyncingCommandTest extends TerminusTestBase
     {
         $this->assertCommandExists('site:autopilot:env-sync:enable');
         $this->assertCommandExists('site:autopilot:env-sync:disable');
+
+        // @todo: add more scenarios.
     }
 }

@@ -19,5 +19,7 @@ final class DestinationCommandTest extends TerminusTestBase
     public function testDestinationSetCommand()
     {
         $this->assertCommandExists('site:autopilot:destination');
+
+        // @todo: add more scenarios.
     }
 }
