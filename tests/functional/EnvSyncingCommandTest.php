@@ -8,6 +8,7 @@ final class EnvSyncingCommandTest extends TerminusTestBase
 {
     public function testEnvSyncingCommand()
     {
-        $this->markTestSkipped();
+        $this->assertCommandExists('site:autopilot:env-sync:enable');
+        $this->assertCommandExists('site:autopilot:env-sync:disable');
     }
 }
