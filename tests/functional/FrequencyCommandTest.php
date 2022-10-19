@@ -29,5 +29,8 @@ final class FrequencyCommandTest extends TerminusTestBase
         ]);
         $output = $this->terminus(sprintf('site:autopilot:frequency %s', $this->getSiteName()));
         $this->assertEquals('weekly', $output);
+
+        $output = $this->terminus(sprintf('site:autopilot:frequency %s monthly', $this->getSiteName()), ['2>&1']);
+        $this->assertStringContainsString('Autopilot frequency updated to monthly.', $output);
     }
 }
