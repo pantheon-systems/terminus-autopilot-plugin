@@ -19,7 +19,8 @@ final class FrequencyCommandTest extends TerminusTestBase
      *
      * @covers \Pantheon\TerminusAutopilot\Commands\FrequencyCommand::frequency()
      *
-     * @see \Pantheon\TerminusAutopilot\AutopilotApi\Client::requestApi()
+     * @see \Pantheon\TerminusAutopilot\AutopilotApi\Client::getFrequency()
+     * @see \Pantheon\TerminusAutopilot\AutopilotApi\Client::setFrequency()
      * @see \Pantheon\TerminusAutopilot\Tests\Functional\Mocks\RequestMock::request()
      */
     public function testFrequencySetCommand()
