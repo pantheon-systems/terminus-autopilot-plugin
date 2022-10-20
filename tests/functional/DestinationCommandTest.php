@@ -39,5 +39,15 @@ final class DestinationCommandTest extends TerminusTestBase
         // Set a valid "destination" setting value.
         $output = $this->terminus(sprintf('site:autopilot:destination %s test', $this->getSiteName()), ['2>&1']);
         $this->assertStringContainsString('Autopilot destination updated to test.', $output);
+
+        // Set an invalid "destination" setting value.
+        $output = $this->terminus(
+            sprintf('site:autopilot:destination %s invalid_destination', $this->getSiteName()),
+            ['2>&1']
+        );
+        $this->assertStringContainsString(
+            'Autopilot destination did not successfully update: "invalid_destination" is not a valid destination value',
+            $output
+        );
     }
 }
