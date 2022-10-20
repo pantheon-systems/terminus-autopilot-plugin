@@ -59,5 +59,25 @@ final class EnvSyncingCommandTest extends TerminusTestBase
             sprintf('Could not locate a site your user may access identified by %s', $non_existing_site_name),
             $output
         );
+
+        $this->setMockPayload([
+            'status_code' => 500,
+            'status_code_reason' => 'server error',
+        ]);
+
+        //  Run 'site:autopilot:env-sync:enable' command for a non-200 status from API.
+        $output = $this->terminus(
+            sprintf('site:autopilot:env-sync:enable %s', $this->getSiteName()),
+            ['2>&1'],
+            false
+        );
+        $this->assertStringContainsString('Failed requesting Autopilot API: server error', $output);
+        //  Run 'site:autopilot:env-sync:disable' command for a non-200 status from API.
+        $output = $this->terminus(
+            sprintf('site:autopilot:env-sync:disable %s', $this->getSiteName()),
+            ['2>&1'],
+            false
+        );
+        $this->assertStringContainsString('Failed requesting Autopilot API: server error', $output);
     }
 }
