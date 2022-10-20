@@ -19,6 +19,7 @@ trait MockPayloadAwareTrait
     private function getMockPayload()
     {
         $payload = getenv('TERMINUS_MOCK_PAYLOAD');
+
         return json_decode($payload, true, 512, JSON_THROW_ON_ERROR);
     }
 
@@ -27,7 +28,7 @@ trait MockPayloadAwareTrait
      *
      * @param mixed $payload
      */
-    private function setMockPayload($payload)
+    private function setMockPayload($payload): void
     {
         putenv(sprintf('TERMINUS_MOCK_PAYLOAD=%s', json_encode($payload)));
     }
