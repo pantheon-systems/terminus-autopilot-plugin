@@ -75,5 +75,16 @@ final class DestinationCommandTest extends TerminusTestBase
             false
         );
         $this->assertStringContainsString('Failed requesting Autopilot API: server error', $output);
+
+        // set "destination" setting value for a non-200 status from API.
+        $output = $this->terminus(
+            sprintf('site:autopilot:destination %s dev', $this->getSiteName()),
+            ['2>&1'],
+            false
+        );
+        $this->assertStringContainsString(
+            'Autopilot destination did not successfully update: Failed requesting Autopilot API: server error',
+            $output
+        );
     }
 }
