@@ -38,5 +38,9 @@ final class EnvSyncingCommandTest extends TerminusTestBase
         // Enable environment syncing.
         $output = $this->terminus(sprintf('site:autopilot:env-sync:enable %s', $this->getSiteName()), ['2>&1']);
         $this->assertStringContainsString('Autopilot environment syncing is enabled.', $output);
+
+        // Disable environment syncing.
+        $output = $this->terminus(sprintf('site:autopilot:env-sync:disable %s', $this->getSiteName()), ['2>&1']);
+        $this->assertStringContainsString('Autopilot environment syncing is disabled.', $output);
     }
 }
