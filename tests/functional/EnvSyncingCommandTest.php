@@ -29,9 +29,7 @@ final class EnvSyncingCommandTest extends TerminusTestBase
         $this->assertCommandExists('site:autopilot:env-sync:disable');
 
         $this->setMockPayload([
-            'data' => [
-                'cloneContent' => ['enabled' => true],
-            ],
+            'data' => null,
             'status_code' => 200,
         ]);
 
