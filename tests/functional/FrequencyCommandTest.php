@@ -29,7 +29,6 @@ final class FrequencyCommandTest extends TerminusTestBase
 
         $this->setMockPayload([
             'data' => ['updateFrequency' => 'WEEKLY'],
-            'status_code' => 200,
         ]);
 
         // Get "frequency" setting value.
@@ -63,7 +62,6 @@ final class FrequencyCommandTest extends TerminusTestBase
         );
 
         $this->setMockPayload([
-            'data' => null,
             'status_code' => 500,
             'status_code_reason' => 'server error',
         ]);

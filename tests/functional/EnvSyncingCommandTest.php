@@ -28,11 +28,6 @@ final class EnvSyncingCommandTest extends TerminusTestBase
         $this->assertCommandExists('site:autopilot:env-sync:enable');
         $this->assertCommandExists('site:autopilot:env-sync:disable');
 
-        $this->setMockPayload([
-            'data' => null,
-            'status_code' => 200,
-        ]);
-
         // Enable environment syncing.
         $output = $this->terminus(sprintf('site:autopilot:env-sync:enable %s', $this->getSiteName()), ['2>&1']);
         $this->assertStringContainsString('Autopilot environment syncing is enabled.', $output);

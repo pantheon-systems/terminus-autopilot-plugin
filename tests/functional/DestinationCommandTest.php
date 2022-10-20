@@ -29,7 +29,6 @@ final class DestinationCommandTest extends TerminusTestBase
 
         $this->setMockPayload([
             'data' => ['deploymentDestination' => 'dev'],
-            'status_code' => 200,
         ]);
 
         // Get "destination" setting value.
@@ -63,7 +62,6 @@ final class DestinationCommandTest extends TerminusTestBase
         );
 
         $this->setMockPayload([
-            'data' => null,
             'status_code' => 500,
             'status_code_reason' => 'server error',
         ]);
