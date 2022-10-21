@@ -30,21 +30,23 @@ abstract class CommandTestBase extends TerminusTestBase
     /**
      * Returns the context data for a mock payload.
      *
-     * @param string $api_uri_suffix
-     * @param array $request_options
+     * @param string $expected_uri_suffix
+     * @param array $expected_request_options
      *
      * @return array
      *
      * @see \Pantheon\TerminusAutopilot\Tests\Functional\Mocks\RequestMock::request()
      */
-    protected function getRequestMockPayloadContext(string $api_uri_suffix, array $request_options = []): array
-    {
-        $uri = sprintf(
+    protected function getRequestMockPayloadContext(
+        string $expected_uri_suffix,
+        array $expected_request_options
+    ): array {
+        $expected_path = sprintf(
             'https://pantheonapi.svc.pantheon.io:443/sites/%s/vrt/%s',
             getenv('TERMINUS_SITE_UUID'),
-            $api_uri_suffix
+            $expected_uri_suffix
         );
-        $request_options = array_merge(
+        $expected_request_options = array_merge(
             [
                 'headers' => [
                     'Accept' => 'application/json',
@@ -52,9 +54,9 @@ abstract class CommandTestBase extends TerminusTestBase
                 ],
                 'verify' => false,
             ],
-            $request_options
+            $expected_request_options
         );
 
-        return [$uri, $request_options];
+        return [$expected_path, $expected_request_options];
     }
 }
