@@ -2,18 +2,13 @@
 
 namespace Pantheon\TerminusAutopilot\Tests\Functional;
 
-use Pantheon\Terminus\Tests\Functional\TerminusTestBase;
-use Pantheon\TerminusAutopilot\Tests\Functional\Mocks\MockPayloadAwareTrait;
-
 /**
  * Class DestinationCommandTest.
  *
  * @package \Pantheon\TerminusAutopilot\Tests\Functional
  */
-final class DestinationCommandTest extends TerminusTestBase
+final class DestinationCommandTest extends CommandTestBase
 {
-    use MockPayloadAwareTrait;
-
     /**
      * @test
      *
@@ -27,15 +22,29 @@ final class DestinationCommandTest extends TerminusTestBase
     {
         $this->assertCommandExists('site:autopilot:destination');
 
-        $this->setMockPayload([
-            'data' => ['deploymentDestination' => 'dev'],
-        ]);
-
         // Get "destination" setting value.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 200,
+                'data' => ['deploymentDestination' => 'dev'],
+            ],
+            'settings',
+            []
+        );
         $output = $this->terminus(sprintf('site:autopilot:destination %s', $this->getSiteName()));
         $this->assertEquals('dev', $output);
 
         // Set a valid "destination" setting value.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 200,
+            ],
+            'settings',
+            [
+                'json' => ['deploymentDestination' => 'test'],
+                'method' => 'POST',
+            ]
+        );
         $output = $this->terminus(sprintf('site:autopilot:destination %s test', $this->getSiteName()), ['2>&1']);
         $this->assertStringContainsString('Autopilot destination updated to test.', $output);
 
@@ -61,12 +70,15 @@ final class DestinationCommandTest extends TerminusTestBase
             $output
         );
 
-        $this->setMockPayload([
-            'status_code' => 500,
-            'status_code_reason' => 'server error',
-        ]);
-
         // Get "destination" setting value for a non-200 status from API.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 500,
+                'status_code_reason' => 'server error',
+            ],
+            'settings',
+            []
+        );
         $output = $this->terminus(
             sprintf('site:autopilot:destination %s', $this->getSiteName()),
             ['2>&1'],
@@ -74,7 +86,18 @@ final class DestinationCommandTest extends TerminusTestBase
         );
         $this->assertStringContainsString('Failed requesting Autopilot API: server error', $output);
 
-        // set "destination" setting value for a non-200 status from API.
+        // Set "destination" setting value for a non-200 status from API.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 500,
+                'status_code_reason' => 'server error',
+            ],
+            'settings',
+            [
+                'json' => ['deploymentDestination' => 'dev'],
+                'method' => 'POST',
+            ]
+        );
         $output = $this->terminus(
             sprintf('site:autopilot:destination %s dev', $this->getSiteName()),
             ['2>&1'],

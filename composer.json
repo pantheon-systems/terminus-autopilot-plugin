@@ -6,7 +6,7 @@
     "autoload": {
         "psr-4": {
             "Pantheon\\TerminusAutopilot\\": "src",
-            "Pantheon\\TerminusAutopilot\\Tests\\Functional\\Mocks\\": "tests/functional/mocks"
+            "Pantheon\\TerminusAutopilot\\Tests\\": "tests"
         }
     },
     "require-dev": {

@@ -2,18 +2,13 @@
 
 namespace Pantheon\TerminusAutopilot\Tests\Functional;
 
-use Pantheon\Terminus\Tests\Functional\TerminusTestBase;
-use Pantheon\TerminusAutopilot\Tests\Functional\Mocks\MockPayloadAwareTrait;
-
 /**
  * Class FrequencyCommandTest.
  *
  * @package \Pantheon\TerminusAutopilot\Tests\Functional
  */
-final class FrequencyCommandTest extends TerminusTestBase
+final class FrequencyCommandTest extends CommandTestBase
 {
-    use MockPayloadAwareTrait;
-
     /**
      * @test
      *
@@ -27,15 +22,29 @@ final class FrequencyCommandTest extends TerminusTestBase
     {
         $this->assertCommandExists('site:autopilot:frequency');
 
-        $this->setMockPayload([
-            'data' => ['updateFrequency' => 'WEEKLY'],
-        ]);
-
         // Get "frequency" setting value.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 200,
+                'data' => ['updateFrequency' => 'WEEKLY'],
+            ],
+            'settings',
+            []
+        );
         $output = $this->terminus(sprintf('site:autopilot:frequency %s', $this->getSiteName()));
         $this->assertEquals('weekly', $output);
 
         // Set a valid "frequency" setting value.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 200,
+            ],
+            'settings',
+            [
+                'json' => ['updateFrequency' => 'MONTHLY'],
+                'method' => 'POST',
+            ]
+        );
         $output = $this->terminus(sprintf('site:autopilot:frequency %s monthly', $this->getSiteName()), ['2>&1']);
         $this->assertStringContainsString('Autopilot frequency updated to monthly.', $output);
 
@@ -61,12 +70,15 @@ final class FrequencyCommandTest extends TerminusTestBase
             $output
         );
 
-        $this->setMockPayload([
-            'status_code' => 500,
-            'status_code_reason' => 'server error',
-        ]);
-
         // Get "frequency" setting value for a non-200 status from API.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 500,
+                'status_code_reason' => 'server error',
+            ],
+            'settings',
+            []
+        );
         $output = $this->terminus(
             sprintf('site:autopilot:frequency %s', $this->getSiteName()),
             ['2>&1'],
@@ -74,7 +86,18 @@ final class FrequencyCommandTest extends TerminusTestBase
         );
         $this->assertStringContainsString('Failed requesting Autopilot API: server error', $output);
 
-        // set "frequency" setting value for a non-200 status from API.
+        // Set "frequency" setting value for a non-200 status from API.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 500,
+                'status_code_reason' => 'server error',
+            ],
+            'settings',
+            [
+                'json' => ['updateFrequency' => 'MANUAL'],
+                'method' => 'POST',
+            ]
+        );
         $output = $this->terminus(
             sprintf('site:autopilot:frequency %s manual', $this->getSiteName()),
             ['2>&1'],

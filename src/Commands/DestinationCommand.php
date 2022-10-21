@@ -43,7 +43,7 @@ class DestinationCommand extends TerminusCommand implements RequestAwareInterfac
         $site = $this->getSite($site_id);
 
         if (null === $destination) {
-            return $this->getClient()->getDestination($site_id);
+            return $this->getClient()->getDestination($site->id);
         }
 
         try {

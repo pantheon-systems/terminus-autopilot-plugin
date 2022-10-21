@@ -5,7 +5,7 @@
          colors="true">
   <testsuites>
     <testsuite name="functional">
-      <directory suffix="Test.php">tests/functional/</directory>
+      <directory suffix="Test.php">tests/Functional/</directory>
     </testsuite>
   </testsuites>
   <coverage
@@ -22,5 +22,6 @@
     <server   name="TERMINUS_TOKEN"           value="${TERMINUS_TOKEN}" />
     <server   name="TERMINUS_SITE"            value="${TERMINUS_SITE}" />
     <server   name="TERMINUS_IS_TESTING_ENV"  value="${TERMINUS_IS_TESTING_ENV}" />
+    <server   name="TERMINUS_SITE_UUID"       value="${TERMINUS_SITE_UUID}" />
   </php>
 </phpunit>

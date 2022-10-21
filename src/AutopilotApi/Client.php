@@ -41,6 +41,46 @@ class Client
     }
 
     /**
+     * Activates Autopilot.
+     *
+     * @param string $site_id
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function activate(string $site_id)
+    {
+        $request_options = [
+            'method' => 'POST',
+        ];
+
+        $this->requestApi(
+            sprintf('sites/%s/vrt/initialize', $site_id),
+            $request_options
+        );
+    }
+
+    /**
+     * Deactivates Autopilot.
+     *
+     * @param string $site_id
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function deactivate(string $site_id)
+    {
+        $request_options = [
+            'method' => 'DELETE',
+        ];
+
+        $this->requestApi(
+            sprintf('sites/%s/vrt/terminate', $site_id),
+            $request_options
+        );
+    }
+
+    /**
      * Sets autopilot environment syncing setting.
      *
      * @param string $site_id
@@ -62,7 +102,10 @@ class Client
             'method' => 'POST',
         ];
 
-        $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id), $request_options);
+        $this->requestApi(
+            sprintf('sites/%s/vrt/settings', $site_id),
+            $request_options
+        );
     }
 
     /**
@@ -112,7 +155,10 @@ class Client
             'method' => 'POST',
         ];
 
-        $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id), $request_options);
+        $this->requestApi(
+            sprintf('sites/%s/vrt/settings', $site_id),
+            $request_options
+        );
     }
 
     /**
@@ -162,7 +208,10 @@ class Client
             'method' => 'POST',
         ];
 
-        $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id), $request_options);
+        $this->requestApi(
+            sprintf('sites/%s/vrt/settings', $site_id),
+            $request_options
+        );
     }
 
     /**
@@ -190,6 +239,7 @@ class Client
             'manual',
             'weekly',
             'monthly',
+            'daily',
         ];
     }
 
@@ -241,9 +291,9 @@ class Client
 
         return sprintf(
             '%s://%s:%s',
-            $config->get('papi_protocol') ?? $config->get('protocol'),
+            $config->get('papi_protocol') ?? $config->get('protocol') ?? 'https',
             $this->getHost(),
-            $config->get('papi_port') ?? $config->get('port')
+            $config->get('papi_port') ?? $config->get('port') ?? '443'
         );
     }
 

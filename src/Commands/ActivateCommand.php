@@ -9,18 +9,18 @@ use Pantheon\Terminus\Site\SiteAwareTrait;
 use Pantheon\TerminusAutopilot\AutopilotApi\AutopilotClientAwareTrait;
 
 /**
- * Class InitializeCommand.
+ * Class ActivateCommand.
  */
-class InitializeCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
+class ActivateCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
 {
     use AutopilotClientAwareTrait;
     use SiteAwareTrait;
 
     /**
-     * Initialize Autopilot.
+     * Activate Autopilot.
      *
-     * @command site:autopilot:initialize
-     * @aliases ap-init
+     * @command site:autopilot:activate
+     * @aliases ap-activate
      * @authorize
      * @filter-output
      *
@@ -31,10 +31,23 @@ class InitializeCommand extends TerminusCommand implements RequestAwareInterface
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function initialize(string $site_id): void
+    public function activate(string $site_id): void
     {
+        // @todo: remove warning once API implemented and tested.
+        $this->log()->warning('This command is not yet implemented or tested!');
+
         $site = $this->getSite($site_id);
 
-        // @todo: implement
+        try {
+            $this->getClient()->activate($site->id);
+        } catch (\Throwable $t) {
+            $this->log()->error(
+                'Autopilot did not successfully activate: {error_message}',
+                ['error_message' => $t->getMessage()]
+            );
+            return;
+        }
+
+        $this->log()->success('Autopilot is activated.');
     }
 }
