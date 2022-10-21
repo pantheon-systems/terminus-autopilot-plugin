@@ -31,7 +31,7 @@ final class ActivateCommandTest extends TerminusTestBase
         $output = $this->terminus(sprintf('site:autopilot:activate %s', $this->getSiteName()), ['2>&1']);
         $this->assertStringContainsString('Autopilot is activated.', $output);
 
-        // Run 'site:autopilot:activate' command for a non-existing site.
+        // Run the command for a non-existing site.
         $non_existing_site_name = 'some-non-existing-site-12345';
         $output = $this->terminus(
             sprintf('site:autopilot:activate %s', $non_existing_site_name),
@@ -42,5 +42,18 @@ final class ActivateCommandTest extends TerminusTestBase
             sprintf('Could not locate a site your user may access identified by %s', $non_existing_site_name),
             $output
         );
+
+        $this->setMockPayload([
+            'status_code' => 500,
+            'status_code_reason' => 'server error',
+        ]);
+
+        // Run the command for a non-200 status from API.
+        $output = $this->terminus(
+            sprintf('site:autopilot:activate %s', $this->getSiteName()),
+            ['2>&1'],
+            false
+        );
+        $this->assertStringContainsString('Failed requesting Autopilot API: server error', $output);
     }
 }
