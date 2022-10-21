@@ -2,18 +2,13 @@
 
 namespace Pantheon\TerminusAutopilot\Tests\Functional;
 
-use Pantheon\Terminus\Tests\Functional\TerminusTestBase;
-use Pantheon\TerminusAutopilot\Tests\Functional\Mocks\MockPayloadAwareTrait;
-
 /**
  * Class DeactivateCommandTest.
  *
  * @package \Pantheon\TerminusAutopilot\Tests\Functional
  */
-final class DeactivateCommandTest extends TerminusTestBase
+final class DeactivateCommandTest extends CommandTestBase
 {
-    use MockPayloadAwareTrait;
-
     /**
      * @test
      *
@@ -26,7 +21,11 @@ final class DeactivateCommandTest extends TerminusTestBase
     {
         $this->assertCommandExists('site:autopilot:deactivate');
 
-        $this->setMockPayload([]);
+        $this->setRequestMockPayload(
+            ['status_code' => 200],
+            'terminate',
+            ['method' => 'DELETE']
+        );
 
         $output = $this->terminus(sprintf('site:autopilot:deactivate %s', $this->getSiteName()), ['2>&1']);
         $this->assertStringContainsString('Autopilot is deactivated.', $output);

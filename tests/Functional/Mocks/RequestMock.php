@@ -28,12 +28,11 @@ class RequestMock extends Request
     {
         $result = array_merge(
             [
-                'status_code' => 200,
                 'data' => null,
                 'headers' => [],
                 'status_code_reason' => '',
             ],
-            $this->getMockPayload()
+            $this->getMockPayload($path, $options)
         );
         return new RequestOperationResult($result);
     }

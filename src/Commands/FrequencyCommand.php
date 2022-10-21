@@ -43,7 +43,7 @@ class FrequencyCommand extends TerminusCommand implements RequestAwareInterface,
         $site = $this->getSite($site_id);
 
         if (null === $frequency) {
-            return $this->getClient()->getFrequency($site_id);
+            return $this->getClient()->getFrequency($site->id);
         }
 
         try {

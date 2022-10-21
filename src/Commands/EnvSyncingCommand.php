@@ -38,7 +38,7 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
         $site = $this->getSite($site_id);
 
         try {
-            $this->getClient()->setEnvSyncing($site_id, true);
+            $this->getClient()->setEnvSyncing($site->id, true);
         } catch (\Throwable $t) {
             $this->log()->error(
                 'Autopilot environment syncing did not successfully enable: {error_message}',
@@ -72,7 +72,7 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
         $site = $this->getSite($site_id);
 
         try {
-            $this->getClient()->setEnvSyncing($site_id, false);
+            $this->getClient()->setEnvSyncing($site->id, false);
         } catch (\Throwable $t) {
             $this->log()->error(
                 'Autopilot environment syncing did not successfully disable: {error_message}',

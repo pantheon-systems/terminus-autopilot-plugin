@@ -2,31 +2,30 @@
 
 namespace Pantheon\TerminusAutopilot\Tests\Functional;
 
-use Pantheon\Terminus\Tests\Functional\TerminusTestBase;
-use Pantheon\TerminusAutopilot\Tests\Functional\Mocks\MockPayloadAwareTrait;
-
 /**
  * Class ActivateCommandTest.
  *
  * @package \Pantheon\TerminusAutopilot\Tests\Functional
  */
-final class ActivateCommandTest extends TerminusTestBase
+final class ActivateCommandTest extends CommandTestBase
 {
-    use MockPayloadAwareTrait;
-
     /**
      * @test
      *
      * @covers \Pantheon\TerminusAutopilot\Commands\ActivateCommand::activate()
      *
-     * @see \Pantheon\TerminusAutopilot\AutopilotApi\Client::activate()
-     * @see \Pantheon\TerminusAutopilot\Tests\Functional\Mocks\RequestMock::request()
+     * @see    \Pantheon\TerminusAutopilot\AutopilotApi\Client::activate()
+     * @see    \Pantheon\TerminusAutopilot\Tests\Functional\Mocks\RequestMock::request()
      */
     public function testActivateCommand()
     {
         $this->assertCommandExists('site:autopilot:activate');
 
-        $this->setMockPayload([]);
+        $this->setRequestMockPayload(
+            ['status_code' => 200],
+            'initialize',
+            ['method' => 'POST']
+        );
 
         $output = $this->terminus(sprintf('site:autopilot:activate %s', $this->getSiteName()), ['2>&1']);
         $this->assertStringContainsString('Autopilot is activated.', $output);
@@ -43,10 +42,14 @@ final class ActivateCommandTest extends TerminusTestBase
             $output
         );
 
-        $this->setMockPayload([
-            'status_code' => 500,
-            'status_code_reason' => 'server error',
-        ]);
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 500,
+                'status_code_reason' => 'server error',
+            ],
+            'initialize',
+            ['method' => 'POST']
+        );
 
         // Run the command for a non-200 status from API.
         $output = $this->terminus(

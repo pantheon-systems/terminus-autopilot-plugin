@@ -291,9 +291,9 @@ class Client
 
         return sprintf(
             '%s://%s:%s',
-            $config->get('papi_protocol') ?? $config->get('protocol'),
+            $config->get('papi_protocol') ?? $config->get('protocol') ?? 'https',
             $this->getHost(),
-            $config->get('papi_port') ?? $config->get('port')
+            $config->get('papi_port') ?? $config->get('port') ?? '443'
         );
     }
 
