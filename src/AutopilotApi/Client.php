@@ -41,6 +41,26 @@ class Client
     }
 
     /**
+     * Activates Autopilot.
+     *
+     * @param string $site_id
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function activate(string $site_id)
+    {
+        $request_options = [
+            'method' => 'POST',
+        ];
+
+        $this->requestApi(
+            sprintf('sites/%s/vrt/initialize', $site_id),
+            $request_options
+        );
+    }
+
+    /**
      * Sets autopilot environment syncing setting.
      *
      * @param string $site_id
