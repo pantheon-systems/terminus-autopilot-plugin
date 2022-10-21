@@ -9,18 +9,18 @@ use Pantheon\Terminus\Site\SiteAwareTrait;
 use Pantheon\TerminusAutopilot\AutopilotApi\AutopilotClientAwareTrait;
 
 /**
- * Class TerminateCommand.
+ * Class ActivateCommand.
  */
-class TerminateCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
+class ActivateCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
 {
     use AutopilotClientAwareTrait;
     use SiteAwareTrait;
 
     /**
-     * Terminate Autopilot.
+     * Activate Autopilot.
      *
-     * @command site:autopilot:terminate
-     * @aliases ap-terminate
+     * @command site:autopilot:activate
+     * @aliases ap-activate
      * @authorize
      * @filter-output
      *
@@ -31,7 +31,7 @@ class TerminateCommand extends TerminusCommand implements RequestAwareInterface,
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function terminate(string $site_id): void
+    public function activate(string $site_id): void
     {
         $site = $this->getSite($site_id);
 

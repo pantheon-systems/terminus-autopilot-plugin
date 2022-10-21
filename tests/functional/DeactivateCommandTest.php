@@ -5,18 +5,18 @@ namespace Pantheon\TerminusAutopilot\Tests\Functional;
 use Pantheon\Terminus\Tests\Functional\TerminusTestBase;
 
 /**
- * Class TerminateCommandTest.
+ * Class DeactivateCommandTest.
  *
  * @package \Pantheon\TerminusAutopilot\Tests\Functional
  */
-final class TerminateCommandTest extends TerminusTestBase
+final class DeactivateCommandTest extends TerminusTestBase
 {
     /**
      * @test
      *
-     * @covers \Pantheon\TerminusAutopilot\Commands\TerminateCommand::terminate()
+     * @covers \Pantheon\TerminusAutopilot\Commands\DeactivateCommand::deactivate()
      */
-    public function testTerminateCommand()
+    public function testDeactivateCommand()
     {
         $this->markTestSkipped();
     }
