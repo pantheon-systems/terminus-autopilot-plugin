@@ -33,6 +33,9 @@ class ActivateCommand extends TerminusCommand implements RequestAwareInterface, 
      */
     public function activate(string $site_id): void
     {
+        // @todo: remove warning once API implemented and tested.
+        $this->log()->warning('This command is not yet implemented or tested!');
+
         $site = $this->getSite($site_id);
 
         try {
