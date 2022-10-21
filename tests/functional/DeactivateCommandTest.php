@@ -18,6 +18,6 @@ final class DeactivateCommandTest extends TerminusTestBase
      */
     public function testDeactivateCommand()
     {
-        $this->markTestSkipped();
+        $this->assertCommandExists('site:autopilot:deactivate');
     }
 }
