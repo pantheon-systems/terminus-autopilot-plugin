@@ -61,6 +61,26 @@ class Client
     }
 
     /**
+     * Deactivates Autopilot.
+     *
+     * @param string $site_id
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function deactivate(string $site_id)
+    {
+        $request_options = [
+            'method' => 'DELETE',
+        ];
+
+        $this->requestApi(
+            sprintf('sites/%s/vrt/terminate', $site_id),
+            $request_options
+        );
+    }
+
+    /**
      * Sets autopilot environment syncing setting.
      *
      * @param string $site_id
