@@ -34,6 +34,8 @@ abstract class CommandTestBase extends TerminusTestBase
      * @param array $request_options
      *
      * @return array
+     *
+     * @see \Pantheon\TerminusAutopilot\Tests\Functional\Mocks\RequestMock::request()
      */
     protected function getRequestMockPayloadContext(string $api_uri_suffix, array $request_options = []): array
     {
