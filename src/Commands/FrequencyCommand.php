@@ -29,7 +29,7 @@ class FrequencyCommand extends TerminusCommand implements RequestAwareInterface,
      *
      * @param string $site_id Site name
      * @param string|null $frequency Autopilot run frequency.
-     *   Available options: manual, monthly, weekly.
+     *   Available options: manual, monthly, weekly, daily.
      *
      * @return string|null
      *

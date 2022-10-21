@@ -190,6 +190,7 @@ class Client
             'manual',
             'weekly',
             'monthly',
+            'daily',
         ];
     }
 
