@@ -62,7 +62,10 @@ class Client
             'method' => 'POST',
         ];
 
-        $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id), $request_options);
+        $this->requestApi(
+            sprintf('sites/%s/vrt/settings', $site_id),
+            $request_options
+        );
     }
 
     /**
@@ -112,7 +115,10 @@ class Client
             'method' => 'POST',
         ];
 
-        $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id), $request_options);
+        $this->requestApi(
+            sprintf('sites/%s/vrt/settings', $site_id),
+            $request_options
+        );
     }
 
     /**
@@ -162,7 +168,10 @@ class Client
             'method' => 'POST',
         ];
 
-        $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id), $request_options);
+        $this->requestApi(
+            sprintf('sites/%s/vrt/settings', $site_id),
+            $request_options
+        );
     }
 
     /**
