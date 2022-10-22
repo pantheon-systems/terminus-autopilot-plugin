@@ -20,9 +20,9 @@ final class DestinationCommandTest extends CommandTestBase
      */
     public function testDestinationSetCommand()
     {
-        $this->assertCommandExists('site:autopilot:destination');
+        $this->assertCommandExists('site:autopilot:deployment-destination');
 
-        // Get "destination" setting value.
+        // Get "deployment destination" setting value.
         $this->setRequestMockPayload(
             [
                 'status_code' => 200,
@@ -31,10 +31,10 @@ final class DestinationCommandTest extends CommandTestBase
             'settings',
             []
         );
-        $output = $this->terminus(sprintf('site:autopilot:destination %s', $this->getSiteName()));
+        $output = $this->terminus(sprintf('site:autopilot:deployment-destination %s', $this->getSiteName()));
         $this->assertEquals('dev', $output);
 
-        // Set a valid "destination" setting value.
+        // Set a valid "deployment destination" setting value.
         $this->setRequestMockPayload(
             [
                 'status_code' => 200,
@@ -45,23 +45,26 @@ final class DestinationCommandTest extends CommandTestBase
                 'method' => 'POST',
             ]
         );
-        $output = $this->terminus(sprintf('site:autopilot:destination %s test', $this->getSiteName()), ['2>&1']);
-        $this->assertStringContainsString('Autopilot destination updated to test.', $output);
+        $output = $this->terminus(
+            sprintf('site:autopilot:deployment-destination %s test', $this->getSiteName()),
+            ['2>&1']
+        );
+        $this->assertStringContainsString('Autopilot deployment destination updated to test.', $output);
 
         // Set an invalid "destination" setting value.
         $output = $this->terminus(
-            sprintf('site:autopilot:destination %s invalid_destination', $this->getSiteName()),
+            sprintf('site:autopilot:deployment-destination %s invalid_destination', $this->getSiteName()),
             ['2>&1']
         );
         $this->assertStringContainsString(
-            'Autopilot destination did not successfully update: "invalid_destination" is not a valid destination value',
+            'Autopilot deployment destination did not successfully update: "invalid_destination" is not a valid deployment destination value',
             $output
         );
 
         // Run the command for a non-existing site.
         $non_existing_site_name = 'some-non-existing-site-12345';
         $output = $this->terminus(
-            sprintf('site:autopilot:destination %s', $non_existing_site_name),
+            sprintf('site:autopilot:deployment-destination %s', $non_existing_site_name),
             ['2>&1'],
             false
         );
@@ -70,7 +73,7 @@ final class DestinationCommandTest extends CommandTestBase
             $output
         );
 
-        // Get "destination" setting value for a non-200 status from API.
+        // Get "deployment destination" setting value for a non-200 status from API.
         $this->setRequestMockPayload(
             [
                 'status_code' => 500,
@@ -80,13 +83,13 @@ final class DestinationCommandTest extends CommandTestBase
             []
         );
         $output = $this->terminus(
-            sprintf('site:autopilot:destination %s', $this->getSiteName()),
+            sprintf('site:autopilot:deployment-destination %s', $this->getSiteName()),
             ['2>&1'],
             false
         );
         $this->assertStringContainsString('Failed requesting Autopilot API: server error', $output);
 
-        // Set "destination" setting value for a non-200 status from API.
+        // Set "deployment-destination" setting value for a non-200 status from API.
         $this->setRequestMockPayload(
             [
                 'status_code' => 500,
@@ -99,12 +102,12 @@ final class DestinationCommandTest extends CommandTestBase
             ]
         );
         $output = $this->terminus(
-            sprintf('site:autopilot:destination %s dev', $this->getSiteName()),
+            sprintf('site:autopilot:deployment-destination %s dev', $this->getSiteName()),
             ['2>&1'],
             false
         );
         $this->assertStringContainsString(
-            'Autopilot destination did not successfully update: Failed requesting Autopilot API: server error',
+            'Autopilot deployment destination did not successfully update: Failed requesting Autopilot API: server error',
             $output
         );
     }
