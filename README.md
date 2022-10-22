@@ -10,6 +10,7 @@ Terminus plugin for controlling Autopilot.
 These commands require no configuration.
 
 ## Commands
+* `site:autopilot:env-sync`
 * `site:autopilot:env-sync:enable`
 * `site:autopilot:env-sync:disable`
 * `site:autopilot:frequency`
