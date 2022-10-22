@@ -168,5 +168,21 @@ final class EnvSyncingCommandTest extends CommandTestBase
             sprintf('Could not locate a site your user may access identified by %s', $non_existing_site_name),
             $output
         );
+
+        // Run the command for a non-200 status from API.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 500,
+                'status_code_reason' => 'server error',
+            ],
+            'settings',
+            []
+        );
+        $output = $this->terminus(
+            sprintf('site:autopilot:env-sync %s', $this->getSiteName()),
+            ['2>&1'],
+            false
+        );
+        $this->assertStringContainsString('Failed requesting Autopilot API: server error', $output);
     }
 }
