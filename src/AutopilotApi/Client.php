@@ -88,9 +88,6 @@ class Client
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
-     *
-     * @parame string $value
-     *
      */
     public function setEnvSyncing(string $site_id, bool $value): void
     {
@@ -106,6 +103,27 @@ class Client
             sprintf('sites/%s/vrt/settings', $site_id),
             $request_options
         );
+    }
+
+    /**
+     * Returns environment syncing setting.
+     *
+     * @param string $site_id
+     *
+     * @return string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function getEnvSyncing(string $site_id): string
+    {
+        $settings = $this->getSettings($site_id);
+
+        if ($settings['cloneContent']->enabled ?? false) {
+            return 'enabled';
+        }
+
+        return 'disabled';
     }
 
     /**

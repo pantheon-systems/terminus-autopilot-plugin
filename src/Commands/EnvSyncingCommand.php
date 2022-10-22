@@ -17,6 +17,30 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
     use SiteAwareTrait;
 
     /**
+     * Ge Autopilot environment syncing setting.
+     *
+     * @command site:autopilot:env-sync
+     * @aliases ap-env-sync
+     * @authorize
+     * @filter-output
+     *
+     * @param string $site_id Site name
+     *
+     * @return string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function get(string $site_id): string
+    {
+        $site = $this->getSite($site_id);
+
+        return $this->getClient()->getEnvSyncing($site->id);
+    }
+
+    /**
      * Enable Autopilot environment syncing.
      *
      * @command site:autopilot:env-sync:enable
