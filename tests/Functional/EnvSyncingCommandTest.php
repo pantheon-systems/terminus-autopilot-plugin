@@ -120,4 +120,41 @@ final class EnvSyncingCommandTest extends CommandTestBase
         );
         $this->assertStringContainsString('Failed requesting Autopilot API: server error', $output);
     }
+
+    /**
+     * @test
+     *
+     * @covers \Pantheon\TerminusAutopilot\Commands\EnvSyncingCommand::get()
+     *
+     * @see \Pantheon\TerminusAutopilot\AutopilotApi\Client::getEnvSyncing()
+     * @see \Pantheon\TerminusAutopilot\Tests\Functional\Mocks\RequestMock::request()
+     */
+    public function testGetEnvSyncingCommand()
+    {
+        $this->assertCommandExists('site:autopilot:env-sync');
+
+        // Get "enabled" environment syncing setting value.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 200,
+                'data' => ['cloneContent' => ['enabled' => true]],
+            ],
+            'settings',
+            []
+        );
+        $output = $this->terminus(sprintf('site:autopilot:env-sync %s', $this->getSiteName()));
+        $this->assertEquals('enabled', $output);
+
+        // Get "disabled" environment syncing setting value.
+        $this->setRequestMockPayload(
+            [
+                'status_code' => 200,
+                'data' => ['cloneContent' => ['enabled' => false]],
+            ],
+            'settings',
+            []
+        );
+        $output = $this->terminus(sprintf('site:autopilot:env-sync %s', $this->getSiteName()));
+        $this->assertEquals('disabled', $output);
+    }
 }

@@ -118,8 +118,12 @@ class Client
     public function getEnvSyncing(string $site_id): string
     {
         $settings = $this->getSettings($site_id);
+        if (!isset($settings['cloneContent'])) {
+            throw new TerminusException('Missing "environment syncing" setting');
+        }
 
-        if ($settings['cloneContent']->enabled ?? false) {
+        $envSyncingSetting = (array) $settings['cloneContent'];
+        if ($envSyncingSetting['enabled'] ?? false) {
             return 'enabled';
         }
 
