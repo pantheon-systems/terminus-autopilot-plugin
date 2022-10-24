@@ -17,18 +17,18 @@ class DestinationCommand extends TerminusCommand implements RequestAwareInterfac
     use SiteAwareTrait;
 
     /**
-     * Get or set Autopilot destination environment.
+     * Get or set Autopilot deployment destination environment.
      *
-     * @command site:autopilot:destination
-     * @aliases ap-destination
+     * @command site:autopilot:deployment-destination
+     * @aliases ap-deployment-dest
      * @authorize
      * @filter-output
      *
-     * @usage <site_id> Get Autopilot destination environment
-     * @usage <site_id> <destination> Set Autopilot destination environment
+     * @usage <site_id> Get Autopilot deployment destination environment
+     * @usage <site_id> <destination> Set Autopilot deployment destination environment
      *
      * @param string $site_id Site name
-     * @param string|null $destination The destination environment.
+     * @param string|null $destination The deployment destination environment.
      *   Available options: dev, test, live.
      *
      * @return string|null
@@ -50,14 +50,14 @@ class DestinationCommand extends TerminusCommand implements RequestAwareInterfac
             $this->getClient()->setDestination($site->id, $destination);
         } catch (\Throwable $t) {
             $this->log()->error(
-                'Autopilot destination did not successfully update: {error_message}',
+                'Autopilot deployment destination did not successfully update: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
             return null;
         }
 
         $this->log()->success(
-            'Autopilot destination updated to {destination}.',
+            'Autopilot deployment destination updated to {destination}.',
             ['destination' => $destination]
         );
 

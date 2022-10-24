@@ -144,14 +144,14 @@ class Client
     {
         $settings = $this->requestApi(sprintf('sites/%s/vrt/settings', $site_id));
         if (!isset($settings['deploymentDestination'])) {
-            throw new TerminusException('Missing "destination" setting');
+            throw new TerminusException('Missing "deployment destination" setting');
         }
 
         return $settings['deploymentDestination'];
     }
 
     /**
-     * Sets autopilot destination setting.
+     * Sets deployment destination setting.
      *
      * @param string $site_id
      * @param string $destination
@@ -163,7 +163,7 @@ class Client
     {
         if (!in_array($destination, $this->getValidDestinations(), true)) {
             throw new TerminusException(
-                '"{destination}" is not a valid destination value. Valid options are: {valid_destinations}.',
+                '"{destination}" is not a valid deployment destination value. Valid options are: {valid_destinations}.',
                 [
                     'destination' => $destination,
                     'valid_destinations' => implode(', ', $this->getValidDestinations())

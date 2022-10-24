@@ -14,7 +14,7 @@ These commands require no configuration.
 * `site:autopilot:env-sync:enable`
 * `site:autopilot:env-sync:disable`
 * `site:autopilot:frequency`
-* `site:autopilot:destination`
+* `site:autopilot:deployment-destination`
 
 ## Installation
 
