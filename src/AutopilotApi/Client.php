@@ -88,9 +88,6 @@ class Client
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
-     *
-     * @parame string $value
-     *
      */
     public function setEnvSyncing(string $site_id, bool $value): void
     {
@@ -109,7 +106,32 @@ class Client
     }
 
     /**
-     * Returns deployment destination environment setting.
+     * Returns environment syncing setting.
+     *
+     * @param string $site_id
+     *
+     * @return string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Pantheon\Terminus\Exceptions\TerminusException
+     */
+    public function getEnvSyncing(string $site_id): string
+    {
+        $settings = $this->getSettings($site_id);
+        if (!isset($settings['cloneContent'])) {
+            throw new TerminusException('Missing "environment syncing" setting');
+        }
+
+        $envSyncingSetting = (array) $settings['cloneContent'];
+        if ($envSyncingSetting['enabled'] ?? false) {
+            return 'enabled';
+        }
+
+        return 'disabled';
+    }
+
+    /**
+     * Returns destination environment setting.
      *
      * @param string $site_id
      *
