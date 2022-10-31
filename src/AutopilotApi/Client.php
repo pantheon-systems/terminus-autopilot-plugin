@@ -55,7 +55,7 @@ class Client
         ];
 
         $this->requestApi(
-            sprintf('sites/%s/vrt/initialize', $site_id),
+            sprintf('sites/%s', $site_id),
             $request_options
         );
     }
@@ -75,7 +75,7 @@ class Client
         ];
 
         $this->requestApi(
-            sprintf('sites/%s/vrt/terminate', $site_id),
+            sprintf('sites/%s', $site_id),
             $request_options
         );
     }
