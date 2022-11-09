@@ -24,7 +24,15 @@ final class ActivateCommandTest extends CommandTestBase
         $this->setRequestMockPayload(
             ['status_code' => 200],
             'initialize',
-            ['method' => 'POST']
+            [
+                'method' => 'POST',
+                'json' => [
+                    'id' => '',
+                    'workspaceId' => '',
+                    'settings' => (object) [],
+                    'skip' => false,
+                ],
+            ]
         );
 
         $output = $this->terminus(sprintf('site:autopilot:activate %s', $this->getSiteName()), ['2>&1']);
