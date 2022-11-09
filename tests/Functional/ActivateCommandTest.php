@@ -25,13 +25,13 @@ final class ActivateCommandTest extends CommandTestBase
             ['status_code' => 200],
             'initialize',
             [
-                'method' => 'POST',
                 'json' => [
                     'id' => '',
                     'workspaceId' => '',
                     'settings' => (object) [],
                     'skip' => false,
                 ],
+                'method' => 'POST',
             ]
         );
 
@@ -57,13 +57,13 @@ final class ActivateCommandTest extends CommandTestBase
             ],
             'initialize',
             [
-                'method' => 'POST',
                 'json' => [
                     'id' => '',
                     'workspaceId' => '',
                     'settings' => (object) [],
                     'skip' => false,
                 ],
+                'method' => 'POST',
             ]
         );
 
