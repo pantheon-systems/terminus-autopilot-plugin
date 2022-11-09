@@ -48,7 +48,15 @@ final class ActivateCommandTest extends CommandTestBase
                 'status_code_reason' => 'server error',
             ],
             'initialize',
-            ['method' => 'POST']
+            [
+                'method' => 'POST',
+                'json' => [
+                    'id' => '',
+                    'workspaceId' => '',
+                    'settings' => (object) [],
+                    'skip' => false,
+                ],
+            ]
         );
 
         // Run the command for a non-200 status from API.
