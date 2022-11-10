@@ -52,10 +52,10 @@ class Client
     {
         $request_options = [
             'json' => [
-                "id" => "",
-                "workspaceId" => "",
-                "settings" => (object) [],
-                "skip" => false,
+                'id' => '',
+                'workspaceId' => '',
+                'settings' => (object) [],
+                'skip' => false,
             ],
             'method' => 'POST',
         ];
