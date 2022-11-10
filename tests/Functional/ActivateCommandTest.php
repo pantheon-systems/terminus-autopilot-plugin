@@ -24,7 +24,15 @@ final class ActivateCommandTest extends CommandTestBase
         $this->setRequestMockPayload(
             ['status_code' => 200],
             'initialize',
-            ['method' => 'POST']
+            [
+                'json' => [
+                    'id' => '',
+                    'workspaceId' => '',
+                    'settings' => (object) [],
+                    'skip' => false,
+                ],
+                'method' => 'POST',
+            ]
         );
 
         $output = $this->terminus(sprintf('site:autopilot:activate %s', $this->getSiteName()), ['2>&1']);
@@ -48,7 +56,15 @@ final class ActivateCommandTest extends CommandTestBase
                 'status_code_reason' => 'server error',
             ],
             'initialize',
-            ['method' => 'POST']
+            [
+                'json' => [
+                    'id' => '',
+                    'workspaceId' => '',
+                    'settings' => (object) [],
+                    'skip' => false,
+                ],
+                'method' => 'POST',
+            ]
         );
 
         // Run the command for a non-200 status from API.

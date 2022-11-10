@@ -51,6 +51,12 @@ class Client
     public function activate(string $site_id)
     {
         $request_options = [
+            'json' => [
+                'id' => '',
+                'workspaceId' => '',
+                'settings' => (object) [],
+                'skip' => false,
+            ],
             'method' => 'POST',
         ];
 
