@@ -293,6 +293,7 @@ class Client
                 ],
                 // @todo Remove "verify" flag post-EA, once service is using trusted cert.
                 'verify' => false,
+                'http_errors' => false,
             ],
             $options
         );
