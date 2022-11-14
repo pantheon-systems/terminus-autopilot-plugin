@@ -17,7 +17,7 @@ class DeactivateCommand extends TerminusCommand implements RequestAwareInterface
     use SiteAwareTrait;
 
     /**
-     * Deactivate Autopilot.
+     * Deactivate Autopilot for a given site ID or site name.
      *
      * @command site:autopilot:deactivate
      * @aliases ap-deactivate
