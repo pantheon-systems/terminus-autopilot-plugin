@@ -17,7 +17,8 @@ class FrequencyCommand extends TerminusCommand implements RequestAwareInterface,
     use SiteAwareTrait;
 
     /**
-     * Get or set Autopilot run frequency.
+     * Get or set Autopilot run frequency with which autopilot update
+     * cycles are run. Valid options are: manual, monthly, weekly, daily.
      *
      * @command site:autopilot:frequency
      * @aliases ap-frequency

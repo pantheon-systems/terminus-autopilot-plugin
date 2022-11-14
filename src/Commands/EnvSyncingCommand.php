@@ -17,7 +17,10 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
     use SiteAwareTrait;
 
     /**
-     * Ge Autopilot environment syncing setting.
+     * Get Autopilot environment syncing setting. Returns
+     * true if enabled, false if not. Env syncing will sync
+     * the target autopilot environment to the live environment
+     * before applying updates in an autopilot cycle.
      *
      * @command site:autopilot:env-sync
      * @aliases ap-env-sync
@@ -41,7 +44,10 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
     }
 
     /**
-     * Enable Autopilot environment syncing.
+     * Explicitly set syncing setting to `enabled` . Returns
+     * true if enabled, false if not. Env syncing will sync
+     * the target autopilot environment to the live environment
+     * before applying updates in an autopilot cycle.
      *
      * @command site:autopilot:env-sync:enable
      * @aliases ap-env-sync-en

@@ -17,7 +17,7 @@ class ActivateCommand extends TerminusCommand implements RequestAwareInterface, 
     use SiteAwareTrait;
 
     /**
-     * Activate Autopilot.
+     * Activate Autopilot for a given site ID or site name.
      *
      * @command site:autopilot:activate
      * @aliases ap-activate

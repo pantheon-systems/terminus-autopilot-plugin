@@ -17,7 +17,8 @@ class DestinationCommand extends TerminusCommand implements RequestAwareInterfac
     use SiteAwareTrait;
 
     /**
-     * Get or set Autopilot deployment destination environment.
+     * Get or set Autopilot deployment destination environment. Env is optional.
+     * Use command without an ENV to get and add the ENV to set.
      *
      * @command site:autopilot:deployment-destination
      * @aliases ap-deployment-dest
