@@ -1,3 +1,5 @@
 vendor
 tools
 .idea
+/.phpunit.result.cache
+/reports
