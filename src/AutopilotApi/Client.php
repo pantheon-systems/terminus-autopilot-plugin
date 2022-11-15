@@ -303,7 +303,8 @@ class Client
         switch ($result->getStatusCode()) {
             // Status code in the 200's... good to go
             case "200":
-                return [];
+                return (array) $result->getData();
+
             // Status Code in the 409: Conflict
             case "409":
                 throw new TerminusException(
