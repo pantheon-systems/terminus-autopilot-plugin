@@ -13,7 +13,7 @@ You can perform comprehensive Autopilot functions through your [Dashboard](https
 
 ## Site Compatibility
 
-Review the [Autopilot Site Compatibility]([https://pantheon.io/docs/guides/autopilot#autopilot-site-compatibility) documentation on Pantheon to ensure that your site is compatible with Autopilot.
+Review the [Autopilot Site Compatibility](https://pantheon.io/docs/guides/autopilot#autopilot-site-compatibility) documentation on Pantheon to ensure that your site is compatible with Autopilot.
 
 ## Plugin Functionality
 
