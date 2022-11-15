@@ -1,63 +1,93 @@
 # Terminus Autopilot Plugin
 
-[![CircleCI](https://circleci.com/gh/pantheon-systems/terminus-autopilot-plugin.svg?style=shield)](https://circleci.com/gh/pantheon-systems/terminus-autopilot-plugin)
+## Autopilot
 
-[![Terminus v3.x Compatible](https://img.shields.io/badge/terminus-3.x-green.svg)](https://github.com/pantheon-systems/terminus-autopilot-plugin)
+Pantheon's Autopilot:
 
-Terminus plugin for controlling Autopilot.
+- Automatically detects when new updates are available
+- Performs the updates in an isolated [Multidev](https://pantheon.io/docs/guides/multidev) environment
+- Tests the updates with automated visual regression testing (VRT)
+- Optionally deploys the updates
 
-## Configuration
+You can perform comprehensive Autopilot functions through your [Dashboard](https://dashbord.pantheon.io). Refer to the [Autopilot guide](https://pantheon.io/docs/guides/autopilot) for more information. 
 
-These commands require no configuration.
+## Site Compatibility
 
-## Commands
+Review the [Autopilot Site Compatibility]([https://pantheon.io/docs/guides/autopilot#autopilot-site-compatibility) documentation on Pantheon to ensure that your site is compatible with Autopilot.
 
-* `site:autopilot:activate {SITE_NAME|SITE_ID}`
+## Plugin Functionality
 
-* `site:autopilot:deactivate {SITE_NAME|SITE_ID}`
+### Early Access
 
-   Activate/Deactivate Autopilot for a given site name or id.
+The Terminus Autopilot plugin is available for Early Access participants. Features for the Terminus Autopilot plugin are in active development. Pantheon's development team is rolling out new functionality often while this product is in Early Access. Visit the [Pantheon Slack channel](https://slackin.pantheon.io/) (or sign up for the channel if you don't already have an account) to learn how you can enroll in our Early Access program. Please review [Pantheon's Software Evaluation Licensing Terms](https://legal.pantheon.io/#contract-hkqlbwpxo) for more information about access to our software.
 
-* `site:autopilot:deployment-destination {SITE_NAME|SITE_ID} {{ENV}}`
+### Terminus Autopilot Plugin Requirements
 
-   Get or set Autopilot deployment destination environment. Env is optional.
-   Use command without an ENV to get and add the ENV to set.
+Autopilot requires the following:
 
-* `site:autopilot:env-sync`
+- A site with Autopilot available
+- Terminus 3
 
-   Get Autopilot environment syncing setting. Returns
-   true if enabled, false if not. Env syncing will sync
-   the target autopilot environment to the live environment
-   efore applying updates in an autopilot cycle.
+### Terminus Autopilot Plugin Functionality
 
-* `site:autopilot:env-sync:enable`
+The Terminus Autopilot plugin does not currently provide the following functionality:
 
-* `site:autopilot:env-sync:disable`
-
-   Explicitly set syncing setting to `enabled/disabled`.
-   Env syncing will sync the target autopilot environment 
-   to the live environment before applying updates in an autopilot cycle.   
-
-* `site:autopilot:frequency`
-
-   Get or set Autopilot run frequency with which autopilot update
-   cycles are run. Valid options are: manual, monthly, weekly, daily.
-
+- Selection of specific modules, themes, or Custom Upstreams for updates
+- Management of excluded updates
 
 ## Installation
 
-To install this plugin using Terminus 3:
-```
-terminus self:plugin:install terminus-autopilot-plugin
-```
+Run the command below to install the Terminus Autopilot plugin.
 
-## Testing
-This project includes four testing targets:
+`terminus self:plugin:install terminus-autopilot-plugin`
 
-* `composer lint`: Syntax-check all php source files.
-* `composer cs`: Code-style check.
-* `composer functional`: Run functional tests.
-To run all checks, use `composer test`.
+## Terminus Autopilot Commands
 
-Note that prior to running the tests, you should first run:
-* `composer install`
+This section provides currently supported commands for the Terminus Autopilot plugin.
+
+###  Activate or Deactivate Autopilot
+
+You can activate for deactivate Autopilot for a specific site name or ID.
+
+To **activate** a site:
+
+`site:autopilot:activate {SITE_NAME|SITE_ID}`
+
+To **deactivate** a site:
+
+`site:autopilot:deactivate {SITE_NAME|SITE_ID}`
+
+### Get the Autopilot Destination Environment
+
+You can use the command below to get the destination environment in which Autopilot is currently running. 
+
+`site:autopilot:deployment-destination {SITE_NAME|SITE_ID}` 
+
+### Set the Autopilot Destination Environment
+
+You can use the command below to set the destination environment for Autopilot.  
+
+`site:autopilot:deployment-destination {SITE_NAME|SITE_ID} {{ENV}}`
+
+### Enable or Disable Environment Syncing
+
+You can explicitly set environment syncing. This syncs the target Autopilot environment to the Live environment before applying updates in an Autopilot cycle.
+
+To **enable** environment syncing:
+
+`site:autopilot:env-sync:enable`
+
+To **disable** environment syncing:
+
+`site:autopilot:env-sync:disable`
+
+## Set Autopilot Frequency
+
+You can use the command below to set the frequency at which Autopilot runs. Valid options are: 
+
+- daily (for Platinum sites and above)
+- weekly
+- monthly
+- manual
+
+`site:autopilot:frequency`
