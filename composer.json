@@ -18,10 +18,7 @@
         "cs": "phpcs --standard=PSR2 -n src tests",
         "cbf": "phpcbf --standard=PSR2 -n src tests",
         "lint": "find src -name '*.php' -print0 | xargs -0 -n1 php -l",
-        "functional": "phpunit --colors=always tests",
-        "create-site": [
-            "./tests/set_up_local_test.sh"
-        ],
+        "functional": "tests/run_functional_test.sh",
         "test": [
             "@lint",
             "@cs",

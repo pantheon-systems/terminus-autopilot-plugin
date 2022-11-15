@@ -4,7 +4,7 @@
  * Bootstrap file for functional tests.
  */
 
-include_once getenv('HOME') . '/terminus/terminus/vendor/autoload.php';
+include_once getenv('TERMINUS_PROJECT_PATH') . '/terminus/vendor/autoload.php';
 
 $tokens_dir = implode(DIRECTORY_SEPARATOR, [$_SERVER['HOME'], '.terminus', 'cache' , 'tokens']);
 if (!is_dir($tokens_dir)) {

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+TERMINUS_PROJECT_PATH="${HOME}/terminus"
+
 #=====================================================================================================================
 # EXPORT needed environment variables
 #
@@ -13,6 +15,8 @@ mkdir -p $(dirname $BASH_ENV)
 touch $BASH_ENV
 (
   echo 'export PATH=$PATH:$HOME/bin'
+  echo 'export PATH=$PATH:$HOME/bin'
+  echo "export TERMINUS_PROJECT_PATH=${TERMINUS_PROJECT_PATH}"
   echo 'export TERMINUS_HIDE_UPDATE_MESSAGE=1'
 ) >> $BASH_ENV
 source $BASH_ENV
@@ -30,8 +34,8 @@ git config --global user.name "Circle CI"
 git config --global core.fileMode false
 
 # This is just to access terminus dev dependencies.
-mkdir $HOME/terminus
-cd $HOME/terminus
+mkdir ${TERMINUS_PROJECT_PATH}
+cd ${TERMINUS_PROJECT_PATH}
 git clone https://github.com/pantheon-systems/terminus.git
 cd terminus
 composer install

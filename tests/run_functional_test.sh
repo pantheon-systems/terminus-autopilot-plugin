@@ -7,8 +7,10 @@
 
 ## terminus self:plugin:install pantheon-systems/terminus-autopilot-plugin
 
+terminus auth:login -n --machine-token="$TERMINUS_TOKEN"
+
 export CI_ORG_ID=5ae1fa30-8cc4-4894-8ca9-d50628dcba17
-export SITENAME="${USER}-testing"
+export SITENAME="TAP-${CIRCLE_BUILD_NUM}"
 export EXISTS=$(terminus site:info "${SITENAME}" --field=id --format=json)
 
 ## If exists is empty, create the site
@@ -37,25 +39,15 @@ terminus env:deploy ${SITENAME}.test
 
 terminus env:deploy ${SITENAME}.live
 
-TERMINUS_TOKEN=$(cat ~/.terminus/cache/session | jq -r .session)
+TOKEN=$(cat ~/.terminus/cache/session | jq -r .session)
+TESTING_TOKEN="{$TERMINUS_TOKEN:=$TOKEN}"
 
 TERMINUS_SITE_UUID=$(terminus site:info ${SITENAME} --field=id --format=json 2>&1)
 
-TERMINUS_TOKEN=${TERMINUS_TOKEN} \
+TERMINUS_TOKEN=${TESTING_TOKEN} \
   TERMINUS_SITE_UUID=${TERMINUS_SITE_UUID}  \
   TERMINUS_IS_TESTING_ENV=TRUE \
   TERMINUS_SITE=${SITENAME} \
-  composer test
+  phpunit --colors=always tests
 
-
-
-## Deploy the dev site to test & live
-## terminus env:deploy ${SITENAME}.test && terminus env:deploy ${SITENAME}.live
-
-## terminus site:autopilot:activate $SITENAME
-## terminus site:autopilot:env-sync:enable $SITENAME
-## terminus site:autopilot:frequency $SITENAME daily
-## terminus site:autopilot:deployment-destination $SITENAME test
-## terminus site:autopilot:deactivate $SITENAME
-
-## terminus site:delete $SITENAME --yes
+terminus site:delete ${SITENAME} --yes
