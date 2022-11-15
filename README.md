@@ -90,4 +90,4 @@ You can use the command below to set the frequency at which Autopilot runs. Vali
 - monthly
 - manual
 
-`site:autopilot:frequency`
+`site:autopilot:frequency {FREQUENCY}`
