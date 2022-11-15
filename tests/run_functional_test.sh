@@ -9,7 +9,7 @@
 
 terminus auth:login -n --machine-token="$TERMINUS_TOKEN"
 
-export CI_ORG_ID=5ae1fa30-8cc4-4894-8ca9-d50628dcba17
+export CI_ORG_ID=0238f947-88b4-4b63-b594-343b0fb25641
 export SITENAME="TAP-${CIRCLE_BUILD_NUM}"
 export EXISTS=$(terminus site:info "${SITENAME}" --field=id --format=json)
 
