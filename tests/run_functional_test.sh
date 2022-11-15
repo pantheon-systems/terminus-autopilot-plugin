@@ -10,18 +10,19 @@
 terminus auth:login -n --machine-token="$TERMINUS_TOKEN"
 
 export CI_ORG_ID=0238f947-88b4-4b63-b594-343b0fb25641
-export SITENAME="TAP-${CIRCLE_BUILD_NUM}"
+## sitename should be lower case to avoid name resolution confusion
+export SITENAME="tap-${CIRCLE_BUILD_NUM}"
 export EXISTS=$(terminus site:info "${SITENAME}" --field=id --format=json)
 
 ## If exists is empty, create the site
 if test -z "${EXISTS}"
 then
   echo "Site does not exist, creating... ${EXISTS}"
-  terminus site:create "${SITENAME}" "${SITENAME}" drupal9 --org=${CI_ORG_ID}
+  terminus site:create ${SITENAME} "${SITENAME}" drupal9 --org=${CI_ORG_ID}
   sleep 10s
 fi
 
-export EXISTS2=$(terminus site:info "${SITENAME}" --field=id --format=json)
+export EXISTS2=$(terminus site:info ${SITENAME} --field=id --format=json)
 
 if test -z "${EXISTS2}"
 then
