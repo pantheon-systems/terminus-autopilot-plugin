@@ -18,6 +18,15 @@ if test -z "${EXISTS}"
 then
   echo "Site does not exist, creating... ${EXISTS}"
   terminus site:create "${SITENAME}" "${SITENAME}" drupal9 --org=${CI_ORG_ID}
+  sleep 10s
+fi
+
+export EXISTS2=$(terminus site:info "${SITENAME}" --field=id --format=json)
+
+if test -z "${EXISTS2}"
+then
+    echo "Unable to generate a site suitable for testing... ${EXISTS2}"
+    exit 1
 fi
 
 ## Wipe the site Database and install basic umami
