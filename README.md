@@ -1,5 +1,7 @@
 # Terminus Autopilot Plugin
 
+## Autopilot
+
 Pantheon's Autopilot:
 
 - Automatically detects when new updates are available
@@ -7,29 +9,31 @@ Pantheon's Autopilot:
 - Tests the updates with automated visual regression testing (VRT)
 - Optionally deploys the updates
 
-## Terminus Autopilot Plugin Functionality
+You can perform comprehensive Autopilot functions through your [Dashboard](https://dashbord.pantheon.io). Refer to the [Autopilot guide](https://pantheon.io/docs/guides/autopilot) for more information. 
 
-You can perform comprehensive Autopilot functions through your [Dashboard] ([https://pantheon.io/docs/guides/autopilot](https://pantheon.io/docs/guides/autopilot)). The Terminus Autopilot plugin does not currently provide the following functionality:
+## Site Compatibility
 
-- Selection of specific modules, themes, or Custom Upstreams for updates
-- Management of excluded updates
+Review the [Autopilot Site Compatibility]([https://pantheon.io/docs/guides/autopilot#autopilot-site-compatibility) documentation on Pantheon to ensure that your site is compatible with Autopilot.
 
-## Early Access
+## Plugin Functionality
+
+### Early Access
 
 The Terminus Autopilot plugin is available for Early Access participants. Features for the Terminus Autopilot plugin are in active development. Pantheon's development team is rolling out new functionality often while this product is in Early Access. Visit the [Pantheon Slack channel](https://slackin.pantheon.io/) (or sign up for the channel if you don't already have an account) to learn how you can enroll in our Early Access program. Please review [Pantheon's Software Evaluation Licensing Terms](https://legal.pantheon.io/#contract-hkqlbwpxo) for more information about access to our software.
 
-## Terminus Autopilot Plugin Requirements
+### Terminus Autopilot Plugin Requirements
 
 Autopilot requires the following:
 
-- A Gold, Platinum, or Diamond account
-- [Multidev](https://pantheon.io/docs/guides/multidev)
-- A compatible version of Drush (if you are not using Integrated Composer)
+- A site with Autopilot available
 - Terminus 3
 
-##Autopilot Site Compatibility
+### Terminus Autopilot Plugin Functionality
 
-Review the [Autopilot Site Compatibility]([https://pantheon.io/docs/guides/autopilot#autopilot-site-compatibility](https://pantheon.io/docs/guides/autopilot#autopilot-site-compatibility)) documentation on Pantheon to ensure that your site is compatible with Autopilot.
+The Terminus Autopilot plugin does not currently provide the following functionality:
+
+- Selection of specific modules, themes, or Custom Upstreams for updates
+- Management of excluded updates
 
 ## Installation
 
@@ -81,31 +85,9 @@ To **disable** environment syncing:
 
 You can use the command below to set the frequency at which Autopilot runs. Valid options are: 
 
-- daily
+- daily (for Platinum sites and above)
 - weekly
 - monthly
 - manual
 
 `site:autopilot:frequency`
-
-## Test the Terminus Autopilot Plugin
-
-You can test the Terminus Autopilot plugin functionality. There are four testing targets outlined below.
-
-NOTE: You must run `composer install` before you run the test commands below.
-
-To **Syntax-check all PHP source files**:
-
-`composer lint`
-
-To **check code style**:
-
-`composer cs`
-
-To **run functional tests**:
-
-`composer functional`
-
-To **run all tests**:
-
-`composer test`
