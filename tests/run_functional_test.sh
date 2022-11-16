@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
 
-## AUTOPILOT & SECRETS **INTERNAL** END-TO-END TEST SETUP
+## AUTOPILOT & SECRETS END-TO-END TEST SETUP
 
 ## Must be part of an org with Autopilot enabled
 ## e.g. 5ae1fa30-8cc4-4894-8ca9-d50628dcba17 is the
 ## pantheon CI org.
-
-## terminus self:plugin:install pantheon-systems/terminus-autopilot-plugin
 
 terminus auth:login -n --machine-token="$TERMINUS_TOKEN"
 

@@ -300,18 +300,19 @@ class Client
         );
 
         $result = $this->request->request($url, $options);
-        switch ($result->getStatusCode()) {
+        $statusCategory = substr((string) $result->getStatusCode(), 0, 1);
+        switch ($statusCategory) {
             // Status code in the 200's... good to go
-            case "200":
+            case "2":
                 return (array) $result->getData();
 
             // Status Code in the 409: Conflict
-            case "409":
+            case "4":
                 throw new TerminusException('Autopilot already active for that site.');
             // Status code in the 500's: Some other errors
-            case "500":
+            case "5":
                 throw new TerminusException(
-                    'Server Internal Error: %reason',
+                    'Internal Server Error: %reason',
                     ['%reason' => $result->getStatusCodeReason() ]
                 );
 
