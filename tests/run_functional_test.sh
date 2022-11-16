@@ -22,6 +22,8 @@ then
   sleep 10s
 fi
 
+terminus auth:login -n --machine-token="$TERMINUS_TOKEN"
+
 export EXISTS2=$(terminus site:info ${SITENAME} --field=id --format=json)
 
 if test -z "${EXISTS2}"
@@ -29,6 +31,8 @@ then
     echo "Unable to generate a site suitable for testing... ${EXISTS2}"
     exit 1
 fi
+
+terminus auth:login -n --machine-token="$TERMINUS_TOKEN"
 
 ## Wipe the site Database and install basic umami
 terminus drush ${SITENAME}.dev -- \
