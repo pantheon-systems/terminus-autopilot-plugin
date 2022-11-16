@@ -28,6 +28,8 @@ terminus auth:login -n --machine-token="$TERMINUS_TOKEN"
 terminus whoami
 touch $HOME/.ssh/config
 echo "StrictHostKeyChecking no" >> "$HOME/.ssh/config"
+echo "${CI_PUBLIC_KEY}" > "%{HOME}/.ssh/id_rsa.pub"
+echo "${CI_PRIVATE_KEY}" > "%{HOME}/.ssh/id_rsa"
 git config --global user.email "$GIT_EMAIL"
 git config --global user.name "Circle CI"
 # Ignore file permissions.
