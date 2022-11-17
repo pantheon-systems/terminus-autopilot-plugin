@@ -293,19 +293,35 @@ class Client
                 ],
                 // @todo Remove "verify" flag post-EA, once service is using trusted cert.
                 'verify' => false,
+                // Do not convert http errors to exceptions
+                'http_errors' => false,
             ],
             $options
         );
 
         $result = $this->request->request($url, $options);
-        if ($result->isError()) {
-            throw new TerminusException(
-                'Failed requesting Autopilot API: {reason}',
-                ['reason' => $result->getStatusCodeReason()]
-            );
-        }
+        $statusCategory = substr((string) $result->getStatusCode(), 0, 1);
+        switch ($statusCategory) {
+            // Status code in the 200's... good to go
+            case "2":
+                return (array) $result->getData();
 
-        return (array) $result->getData();
+            // Status Code in the 409: Conflict
+            case "4":
+                throw new TerminusException('Autopilot already active for that site.');
+            // Status code in the 500's: Some other errors
+            case "5":
+                throw new TerminusException(
+                    'Internal Server Error: %reason',
+                    ['%reason' => $result->getStatusCodeReason() ]
+                );
+
+            default:
+                throw new TerminusException(
+                    'General Error: %reason',
+                    ['%reason' => $result->getStatusCodeReason() ]
+                );
+        }
     }
 
     /**
