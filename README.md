@@ -69,6 +69,12 @@ You can use the command below to set the destination environment for Autopilot.
 
 `site:autopilot:deployment-destination {SITE_NAME|SITE_ID} {{ENV}}`
 
+### Get the Environment Syncing Status
+
+You can use the command below to get the status of environment syncing. 
+
+`site:autopilot:env-sync {SITE_NAME|SITE_ID}` 
+
 ### Enable or Disable Environment Syncing
 
 You can explicitly set environment syncing. This syncs the target Autopilot environment to the Live environment before applying updates in an Autopilot cycle.
