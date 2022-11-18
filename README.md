@@ -81,7 +81,13 @@ To **disable** environment syncing:
 
 `site:autopilot:env-sync:disable`
 
-## Set Autopilot Frequency
+### Get Autopilot Frequency
+
+You can use the command below to get the frequency at which Autopilot currently runs. 
+
+`site:autopilot:frequency {SITE_NAME|SITE_ID}`
+
+### Set Autopilot Frequency
 
 You can use the command below to set the frequency at which Autopilot runs. Valid options are: 
 
@@ -90,4 +96,4 @@ You can use the command below to set the frequency at which Autopilot runs. Vali
 - monthly
 - manual
 
-`site:autopilot:frequency {FREQUENCY}`
+`site:autopilot:frequency {SITE_NAME|SITE_ID} {FREQUENCY}`
