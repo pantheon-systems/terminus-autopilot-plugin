@@ -308,7 +308,11 @@ class Client
 
             // Status Code in the 409: Conflict
             case "4":
-                throw new TerminusException('Autopilot already active for that site.');
+                if ($statusCode = $result->getStatusCode() === 409) {
+                    throw new TerminusException('Autopilot already active for that site.');
+                }
+                throw new TerminusException('Autopilot not yet active for that site.');
+
             // Status code in the 500's: Some other errors
             case "5":
                 throw new TerminusException(
