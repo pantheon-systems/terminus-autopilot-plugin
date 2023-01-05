@@ -42,7 +42,7 @@ abstract class CommandTestBase extends TerminusTestBase
         array $expected_request_options
     ): array {
         $expected_path = sprintf(
-            'https://pantheonapi.svc.pantheon.io:443/sites/%s/vrt/%s',
+            'https://api.pantheon.io:443/autopilot/v1/sites/%s/vrt/%s',
             getenv('TERMINUS_SITE_UUID'),
             $expected_uri_suffix
         );
@@ -52,7 +52,6 @@ abstract class CommandTestBase extends TerminusTestBase
                     'Accept' => 'application/json',
                     'Authorization' => null,
                 ],
-                'verify' => false,
             ],
             $expected_request_options
         );
