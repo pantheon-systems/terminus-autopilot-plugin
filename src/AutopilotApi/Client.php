@@ -291,8 +291,6 @@ class Client
                     'Accept' => 'application/json',
                     'Authorization' => $this->request->session()->get('session'),
                 ],
-                // @todo Remove "verify" flag post-EA, once service is using trusted cert.
-                'verify' => false,
                 // Do not convert http errors to exceptions
                 'http_errors' => false,
             ],
@@ -338,7 +336,7 @@ class Client
         $config = $this->request->getConfig();
 
         return sprintf(
-            '%s://%s:%s',
+            '%s://%s:%s/autopilot/v1',
             $config->get('papi_protocol') ?? $config->get('protocol') ?? 'https',
             $this->getHost(),
             $config->get('papi_port') ?? $config->get('port') ?? '443'
@@ -362,6 +360,6 @@ class Client
             return str_replace('hermes', 'pantheonapi', $config->get('host'));
         }
 
-        return 'pantheonapi.svc.pantheon.io';
+        return 'api.pantheon.io';
     }
 }
