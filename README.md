@@ -17,6 +17,10 @@ Review the [Autopilot Site Compatibility]([https://pantheon.io/docs/guides/autop
 
 ## Plugin Functionality
 
+### Early Access
+
+The Terminus Autopilot plugin is available for Early Access participants. Features for the Terminus Autopilot plugin are in active development. Pantheon's development team is rolling out new functionality often while this product is in Early Access. Visit the [Pantheon Slack channel](https://slackin.pantheon.io/) (or sign up for the channel if you don't already have an account) to learn how you can enroll in our Early Access program. Please review [Pantheon's Software Evaluation Licensing Terms](https://legal.pantheon.io/#contract-hkqlbwpxo) for more information about access to our software.
+
 ### Terminus Autopilot Plugin Requirements
 
 Autopilot requires the following:
