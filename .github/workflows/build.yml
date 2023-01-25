@@ -41,7 +41,7 @@ jobs:
       - name: PHPCompatibility
         uses: pantheon-systems/phpcompatibility-action@v1
         with:
-          test-versions: 7.4-8.1
+          test-versions: 7.4-8.2
           paths: ${{ github.workspace }}/src
 
   functional:
@@ -51,7 +51,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ 'macos-latest' ]
-        php-versions: [ '7.4', '8.1' ]
+        php-versions: [ '7.4', '8.1', '8.2' ]
       max-parallel: 1
     env:
       TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
@@ -71,25 +71,17 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: gd, mbstring, zip, ssh2-1.3.1
+          extensions: gd, mbstring, zip, ssh2-1.3.1, pcov
           coverage: pcov
           ini-values: error_reporting=E_ALL
       - name: Download repo content from artifact
         uses: actions/download-artifact@v2
         with:
           name: full-workspace
-      - name: Install Composer Dependencies
-        run: composer install --no-interaction --prefer-dist
       - name: Install Terminus
         uses: pantheon-systems/terminus-github-actions@main
         with:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
           terminus-version: 3.1.1
-      - name: Functional Tests
-        if: ${{ github.event_name == 'push' || github.event_name == 'schedule' || github.event.inputs.functional_tests_group == 'all' }}
-        run: composer test
-      - name: Save coverage as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: CoverageReport
-          path: docs/TestCoverage.md
+      - name: Run e2e test
+        runs: ./tests/e2e.sh

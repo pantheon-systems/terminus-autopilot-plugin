@@ -1,6 +1,10 @@
 !/usr/bin/env bash
 
-terminus self:plugin:install pantheon-systems/terminus-autopilot-plugin
+SCRIPT=$(readlink -f $0)
+SCRIPTPATH=`dirname $SCRIPT`
+ROOT_DIR==`dirname $SCRIPTPATH`
+
+terminus self:plugin:install ${ROOT_DIR}
 
 VERSION=$(cat .version)
 VERSION_SAFE="${VERSION//./}"
