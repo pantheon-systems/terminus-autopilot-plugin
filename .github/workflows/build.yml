@@ -85,6 +85,6 @@ jobs:
           terminus-version: 3.1.1
       - name: Run e2e test
         run: ./tests/e2e.sh
-        with:
+        env:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
           terminus-version: 3.1.1
