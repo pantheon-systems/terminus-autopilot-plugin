@@ -84,4 +84,8 @@ jobs:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
           terminus-version: 3.1.1
       - name: Run e2e test
+        uses: pantheon-systems/terminus-github-actions@main
         runs: ./tests/e2e.sh
+        with:
+          pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
+          terminus-version: 3.1.1
