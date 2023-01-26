@@ -93,7 +93,7 @@ jobs:
         if: ${{ github.event.inputs.tmate_enabled == 1 }}
         uses: mxschmitt/action-tmate@v3
       - name: Run e2e test
-        run: chmod +x ${GITHUB_WORKSPACE}/.github/e2e.sh && bash ${GITHUB_WORKSPACE}/.github/e2e.sh
+        run: bash ${GITHUB_WORKSPACE}/.github/e2e.sh
         env:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
           terminus-version: ${{ env.TERMINUS_VERSION }}
