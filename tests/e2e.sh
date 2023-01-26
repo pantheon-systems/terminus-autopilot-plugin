@@ -1,24 +1,25 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
-ROOT_DIR==`dirname $SCRIPTPATH`
+ROOT_DIR=`dirname $SCRIPTPATH`
+VERSION=$(cat .version)
+VERSION_SAFE="${VERSION//./}"
+SITENAME="${VERSION_SAFE}-api-testing"
+CI_ORG_ID=5ae1fa30-8cc4-4894-8ca9-d50628dcba17
+
+terminus site:delete "${SITENAME}" --yes --quiet &> /dev/null
+
+echo "===================================================="
+echo "Root Dir: ${ROOT_DIR}"
+echo "Version: ${VERSION_SAFE}"
+echo "Testing Site: ${SITENAME}"
+echo "===================================================="
 
 terminus self:plugin:install ${ROOT_DIR}
 
-VERSION=$(cat .version)
-VERSION_SAFE="${VERSION//./}"
-
-CI_ORG_ID=5ae1fa30-8cc4-4894-8ca9-d50628dcba17
-SITENAME="${$1:=$VERSION_SAFE-api-testing}"
-EXISTS=$(terminus site:info "${SITENAME}" --field=id --format=json 2>&1)
-
 ## If exists is empty, create the site
-if test -z "${EXISTS}"
-then
-  echo "Site does not exist, creating... ${EXISTS}"
-  terminus site:create "${SITENAME}" "${SITENAME}" drupal9 --org=${CI_ORG_ID}
-fi
+terminus site:create "${SITENAME}" "${SITENAME}" drupal9 --org=${CI_ORG_ID}
 
 ## Wipe the site Database and install basic umami
 terminus drush ${SITENAME}.dev -- \
@@ -28,6 +29,8 @@ terminus drush ${SITENAME}.dev -- \
 
 ## set the connection of the site to GIT mode
 terminus connection:set ${SITENAME}.dev git
+
+terminus site:autopilot:activate $SITENAME
 
 ## set the site's plan to basic paid plan
 ## terminus plan:set $SITENAME plan-basic_small-contract-annual-1
@@ -41,7 +44,6 @@ curl $SITE_DEV
 ## Deploy the dev site to test & live
 terminus env:deploy ${SITENAME}.test && terminus env:deploy ${SITENAME}.live
 
-terminus site:autopilot:activate $SITENAME
 terminus site:autopilot:env-sync:enable $SITENAME
 terminus site:autopilot:frequency $SITENAME daily
 terminus site:autopilot:deployment-destination $SITENAME test
