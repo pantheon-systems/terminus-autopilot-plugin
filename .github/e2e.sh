@@ -7,7 +7,7 @@ VERSION=$(cat .version)
 VERSION_SAFE="${VERSION//./}"
 CI_ORG_ID=0238f947-88b4-4b63-b594-343b0fb25641
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
-SITENAME="${VERSION_SAFE}-PHP${PHP_VERSION//./}-autopilot"
+SITENAME="${VERSION_SAFE}-PHP${PHP_VERSION//./}-${GITHUB_REF_NAME}"
 
 terminus site:delete "${SITENAME}" --yes --quiet &> /dev/null
 
