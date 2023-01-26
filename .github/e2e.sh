@@ -26,7 +26,7 @@ echo "===================================================="
 
 echo "Creating Site: ${SITENAME}"
 ## If exists is empty, create the site
-terminus site:create "${SITENAME}" "${SITENAME}" drupal9 --org=${TERMINUS_ORG}
+terminus site:create "${SITENAME}" "${SITENAME}" drupal-composer-managed --org=${TERMINUS_ORG}
 echo "===================================================="
 
 wait 30
