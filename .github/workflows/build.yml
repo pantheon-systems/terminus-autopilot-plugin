@@ -59,6 +59,7 @@ jobs:
       TERMINUS_ORG: ${{ secrets.TERMINUS_ORG }}
       TERMINUS_USER: ${{ secrets.TERMINUS_USER }}
       TERMINUS_ALLOW_UNSUPPORTED_NEWER_PHP: true
+      TERMINUS_VERSION: 3.1.1
     needs:
       - checkout_build
       - phpcompatibility
@@ -83,9 +84,9 @@ jobs:
         uses: pantheon-systems/terminus-github-actions@main
         with:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
-          terminus-version: 3.1.1
+          terminus-version: ${{ TERMINUS_VERSION }}
       - name: Run e2e test
         run: chmod +x ${GITHUB_WORKSPACE}/.github/e2e.sh && bash ${GITHUB_WORKSPACE}/.github/e2e.sh
         env:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
-          terminus-version: 3.1.1
+          terminus-version: ${{ TERMINUS_VERSION }}
