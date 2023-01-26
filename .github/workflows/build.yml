@@ -9,6 +9,10 @@ on:
         description: Run arbitrary functional tests group by name or all (short and long) tests (default)
         required: true
         default: all
+      tmate_enabled:
+        description: Enable tmate debugging
+        required: true
+        default: "0"
 jobs:
   # Checkout in separate job because docker image is alpine based and checkout action doesn't work.
   checkout_build:
@@ -85,6 +89,9 @@ jobs:
         with:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
           terminus-version: ${{ env.TERMINUS_VERSION }}
+      - name: Setup tmate session
+        if: ${{ github.event.inputs.tmate_enabled == 1 }}
+        uses: mxschmitt/action-tmate@v3
       - name: Run e2e test
         run: chmod +x ${GITHUB_WORKSPACE}/.github/e2e.sh && bash ${GITHUB_WORKSPACE}/.github/e2e.sh
         env:
