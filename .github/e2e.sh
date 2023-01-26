@@ -31,6 +31,8 @@ echo "Creating Site: ${SITENAME}"
 terminus site:create "${SITENAME}" "${SITENAME}" drupal9 --org=${CI_ORG_ID}
 echo "===================================================="
 
+wait 30
+
 echo "Installing Site: ${SITENAME}"
 ## Wipe the site Database and install basic umami
 terminus drush ${SITENAME}.dev -- \
