@@ -84,7 +84,7 @@ jobs:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
           terminus-version: 3.1.1
       - name: Run e2e test
-        run: chmod +x ${GITHUB_WORKSPACE}/tests/e2e.sh && bash ${GITHUB_WORKSPACE}/tests/e2e.sh
+        run: chmod +x ${GITHUB_WORKSPACE}/.github/e2e.sh && bash ${GITHUB_WORKSPACE}/.github/e2e.sh
         env:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
           terminus-version: 3.1.1
