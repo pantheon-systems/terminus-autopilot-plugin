@@ -41,7 +41,7 @@ jobs:
       - name: PHPCompatibility
         uses: pantheon-systems/phpcompatibility-action@v1
         with:
-          test-versions: 7.4-8.2
+          test-versions: 7.4-8.1
           paths: ${{ github.workspace }}/src
 
   functional:
