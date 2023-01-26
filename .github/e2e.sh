@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+VCS_REF=$(git rev-parse --short HEAD)
+DATE_TAG=$(TZ=UTC date +%Y-%m-%d_%H.%M)
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=$(dirname $SCRIPT)
 ROOT_DIR=$(dirname $SCRIPTPATH)
@@ -7,7 +9,7 @@ VERSION=$(cat .version)
 VERSION_SAFE="${VERSION//./}"
 CI_ORG_ID=0238f947-88b4-4b63-b594-343b0fb25641
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
-SITENAME="${VERSION_SAFE}-PHP${PHP_VERSION//./}-${GITHUB_REF_NAME}"
+SITENAME="${VERSION_SAFE}-PHP${PHP_VERSION//./}-${VCS_REF}"
 
 terminus site:delete "${SITENAME}" --yes --quiet &> /dev/null
 
@@ -58,15 +60,15 @@ terminus env:deploy ${SITENAME}.test && terminus env:deploy ${SITENAME}.live
 echo "===================================================="
 
 echo "Enable Env sync: ${SITENAME}"
-terminus site:autopilot:env-sync:enable $SITENAME
+terminus site:autopilot:env-sync:enable "${SITENAME}"
 echo "===================================================="
 
 echo "Enable Env sync: ${SITENAME}"
-terminus site:autopilot:frequency $SITENAME daily
+terminus site:autopilot:frequency "${SITENAME}" daily
 echo "===================================================="
 
 echo "Setting Frequency: ${SITENAME}"
-terminus site:autopilot:deployment-destination $SITENAME test
+terminus site:autopilot:deployment-destination "${SITENAME}" test
 echo "===================================================="
 
 echo "Deleting test site: ${SITENAME}"
