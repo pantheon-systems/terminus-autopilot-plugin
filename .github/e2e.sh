@@ -7,7 +7,7 @@ SCRIPTPATH=$(dirname $SCRIPT)
 ROOT_DIR=$(dirname $SCRIPTPATH)
 VERSION=$(cat .version)
 VERSION_SAFE="${VERSION//./}"
-CI_ORG_ID=0238f947-88b4-4b63-b594-343b0fb25641
+CI_ORG_ID=${TERMINUS_ORG}
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
 SITENAME="${VERSION_SAFE}-PHP${PHP_VERSION//./}-${VCS_REF}"
 
@@ -17,6 +17,9 @@ echo "===================================================="
 echo "Root Dir: ${ROOT_DIR}"
 echo "Version: ${VERSION_SAFE}"
 echo "Testing Site: ${SITENAME}"
+echo "User ID: ${TERMINUS_USER}"
+echo "CI Org id: ${TERMINUS_ORG}"
+
 echo "===================================================="
 
 echo "Installing Plugin: "
