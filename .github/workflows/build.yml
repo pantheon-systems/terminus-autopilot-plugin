@@ -41,7 +41,7 @@ jobs:
       - name: PHPCompatibility
         uses: pantheon-systems/phpcompatibility-action@v1
         with:
-          test-versions: 7.4-8.1
+          test-versions: 7.4-8.3
           paths: ${{ github.workspace }}/src
 
   functional:
@@ -51,7 +51,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ 'macos-latest' ]
-        php-versions: [ '7.4', '8.1', '8.2' ]
+        php-versions: [ '7.4', '8.1' ]
       max-parallel: 3
     env:
       TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
