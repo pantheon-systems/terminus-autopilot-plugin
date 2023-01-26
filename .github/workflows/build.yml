@@ -90,7 +90,7 @@ jobs:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
           terminus-version: ${{ env.TERMINUS_VERSION }}
       - name: Setup tmate session
-        if: ${{ github.event.inputs.tmate_enabled == 1 }}
+        #if: ${{ github.event.inputs.tmate_enabled == 1 }}
         uses: mxschmitt/action-tmate@v3
       - name: Run e2e test
         run: bash ${GITHUB_WORKSPACE}/.github/e2e.sh
