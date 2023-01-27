@@ -4,7 +4,9 @@
  * Bootstrap file for functional tests.
  */
 
-include_once getenv('TERMINUS_PROJECT_PATH') . '/terminus/vendor/autoload.php';
+$project_root = dirname(basename(__DIR__));
+
+include_once $project_root . '/vendor/pantheon-systems/terminus/vendor/autoload.php';
 
 $tokens_dir = implode(DIRECTORY_SEPARATOR, [$_SERVER['HOME'], '.terminus', 'cache' , 'tokens']);
 if (!is_dir($tokens_dir)) {
