@@ -39,7 +39,7 @@ class DeactivateCommand extends TerminusCommand implements RequestAwareInterface
             $this->getClient()->deactivate($site->id);
         } catch (\Throwable $t) {
             $this->log()->error(
-                'Autopilot did not successfully deactivate: {error_message}',
+                'Error deactivating Autopilot: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
             return;

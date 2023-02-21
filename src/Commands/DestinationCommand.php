@@ -51,7 +51,7 @@ class DestinationCommand extends TerminusCommand implements RequestAwareInterfac
             $this->getClient()->setDestination($site->id, $destination);
         } catch (\Throwable $t) {
             $this->log()->error(
-                'Autopilot deployment destination did not successfully update: {error_message}',
+                'Error setting deployment destination: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
             return null;
