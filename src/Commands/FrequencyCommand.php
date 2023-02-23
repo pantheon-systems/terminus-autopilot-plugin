@@ -51,7 +51,7 @@ class FrequencyCommand extends TerminusCommand implements RequestAwareInterface,
             $this->getClient()->setFrequency($site->id, $frequency);
         } catch (\Throwable $t) {
             $this->log()->error(
-                'Autopilot frequency did not successfully update: {error_message}',
+                'Error updating frequency: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
             return null;

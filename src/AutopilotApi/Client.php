@@ -298,32 +298,22 @@ class Client
         );
 
         $result = $this->request->request($url, $options);
-        $statusCategory = substr((string) $result->getStatusCode(), 0, 1);
-        switch ($statusCategory) {
-            // Status code in the 200's... good to go
-            case "2":
-                return (array) $result->getData();
-
-            // Status Code in the 409: Conflict
-            case "4":
-                if ($statusCode = $result->getStatusCode() === 409) {
-                    throw new TerminusException('Autopilot already active for that site.');
-                }
-                throw new TerminusException('Autopilot not yet active for that site.');
-
-            // Status code in the 500's: Some other errors
-            case "5":
-                throw new TerminusException(
-                    'Internal Server Error: %reason',
-                    ['%reason' => $result->getStatusCodeReason() ]
-                );
-
-            default:
-                throw new TerminusException(
-                    'General Error: %reason',
-                    ['%reason' => $result->getStatusCodeReason() ]
-                );
+        $statusCode = $result->getStatusCode();
+        $data = $result->getData();
+        // If it went ok, just return data.
+        if ($statusCode >= 200 && $statusCode < 300) {
+            return (array) $result->getData();
+        } elseif (!empty($data->error)) {
+            // If error was correctly set from backend, throw it.
+            throw new TerminusException($data->error);
         }
+        throw new TerminusException(
+            'An error ocurred. Code: %code. Message: %reason',
+            [
+                '%code' => $statusCode,
+                '%reason' => $result->getStatusCodeReason(),
+            ]
+        );
     }
 
     /**

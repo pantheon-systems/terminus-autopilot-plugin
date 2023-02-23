@@ -39,7 +39,7 @@ class ActivateCommand extends TerminusCommand implements RequestAwareInterface, 
             $this->getClient()->activate($site->id);
         } catch (\Throwable $t) {
             $this->log()->error(
-                'Autopilot did not successfully activate: {error_message}',
+                'Error activating Autopilot: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
             return;
