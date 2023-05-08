@@ -7,6 +7,7 @@ use Pantheon\Terminus\Request\RequestAwareInterface;
 use Pantheon\Terminus\Site\SiteAwareInterface;
 use Pantheon\Terminus\Site\SiteAwareTrait;
 use Pantheon\TerminusAutopilot\AutopilotApi\AutopilotClientAwareTrait;
+use Pantheon\Terminus\Exceptions\TerminusException;
 
 /**
  * Class ActivateCommand.
@@ -38,11 +39,10 @@ class ActivateCommand extends TerminusCommand implements RequestAwareInterface, 
         try {
             $this->getClient()->activate($site->id);
         } catch (\Throwable $t) {
-            $this->log()->error(
+            throw new TerminusException(
                 'Error activating Autopilot: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
-            return;
         }
 
         $this->log()->success('Autopilot is activated.');

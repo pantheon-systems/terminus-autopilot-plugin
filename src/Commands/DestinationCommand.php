@@ -7,6 +7,7 @@ use Pantheon\Terminus\Request\RequestAwareInterface;
 use Pantheon\Terminus\Site\SiteAwareInterface;
 use Pantheon\Terminus\Site\SiteAwareTrait;
 use Pantheon\TerminusAutopilot\AutopilotApi\AutopilotClientAwareTrait;
+use Pantheon\Terminus\Exceptions\TerminusException;
 
 /**
  * Class DestinationSetCommand.
@@ -50,11 +51,10 @@ class DestinationCommand extends TerminusCommand implements RequestAwareInterfac
         try {
             $this->getClient()->setDestination($site->id, $destination);
         } catch (\Throwable $t) {
-            $this->log()->error(
+            throw new TerminusException(
                 'Error setting deployment destination: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
-            return null;
         }
 
         $this->log()->success(

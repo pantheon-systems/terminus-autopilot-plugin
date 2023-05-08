@@ -7,6 +7,7 @@ use Pantheon\Terminus\Request\RequestAwareInterface;
 use Pantheon\Terminus\Site\SiteAwareInterface;
 use Pantheon\Terminus\Site\SiteAwareTrait;
 use Pantheon\TerminusAutopilot\AutopilotApi\AutopilotClientAwareTrait;
+use Pantheon\Terminus\Exceptions\TerminusException;
 
 /**
  * Class FrequencyCommand.
@@ -50,11 +51,10 @@ class FrequencyCommand extends TerminusCommand implements RequestAwareInterface,
         try {
             $this->getClient()->setFrequency($site->id, $frequency);
         } catch (\Throwable $t) {
-            $this->log()->error(
+            throw new TerminusException(
                 'Error updating frequency: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
-            return null;
         }
 
         $this->log()->success(
