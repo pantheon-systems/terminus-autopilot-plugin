@@ -7,6 +7,7 @@ use Pantheon\Terminus\Request\RequestAwareInterface;
 use Pantheon\Terminus\Site\SiteAwareInterface;
 use Pantheon\Terminus\Site\SiteAwareTrait;
 use Pantheon\TerminusAutopilot\AutopilotApi\AutopilotClientAwareTrait;
+use Pantheon\Terminus\Exceptions\TerminusException;
 
 /**
  * Class EnvSyncingCommand.
@@ -70,11 +71,10 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
         try {
             $this->getClient()->setEnvSyncing($site->id, true);
         } catch (\Throwable $t) {
-            $this->log()->error(
+            throw new TerminusException(
                 'Error enabling environment syncing: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
-            return;
         }
 
         $this->log()->success('Autopilot environment syncing is enabled.');
@@ -104,11 +104,10 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
         try {
             $this->getClient()->setEnvSyncing($site->id, false);
         } catch (\Throwable $t) {
-            $this->log()->error(
+            throw new TerminusException(
                 'Error disabling environment syncing: {error_message}',
                 ['error_message' => $t->getMessage()]
             );
-            return;
         }
 
         $this->log()->success('Autopilot environment syncing is disabled.');
