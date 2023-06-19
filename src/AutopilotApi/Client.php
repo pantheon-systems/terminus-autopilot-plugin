@@ -54,7 +54,9 @@ class Client
             'json' => [
                 'id' => '',
                 'workspaceId' => '',
-                'settings' => (object) [],
+                'settings' => [
+                    'updateFrequency' => 'WEEKLY',
+                ],
                 'skip' => false,
             ],
             'method' => 'POST',
