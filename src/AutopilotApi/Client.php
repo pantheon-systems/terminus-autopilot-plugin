@@ -281,7 +281,6 @@ class Client
      *
      * @return array
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
      */
     public function requestApi(string $path, array $options = []): array
@@ -305,7 +304,8 @@ class Client
         // If it went ok, just return data.
         if ($statusCode >= 200 && $statusCode < 300) {
             return (array) $result->getData();
-        } elseif (!empty($data->error)) {
+        }
+        if (!empty($data->error)) {
             // If error was correctly set from backend, throw it.
             throw new TerminusException($data->error);
         }
