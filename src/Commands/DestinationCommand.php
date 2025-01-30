@@ -31,7 +31,7 @@ class DestinationCommand extends TerminusCommand implements RequestAwareInterfac
      *
      * @param string $site_id Site name
      * @param string|null $destination The deployment destination environment.
-     *   Available options: dev, test, live.
+     *   Available options: dev, test, live, none.
      *
      * @return string|null
      *

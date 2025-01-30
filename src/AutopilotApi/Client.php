@@ -255,6 +255,7 @@ class Client
             'dev',
             'test',
             'live',
+            'none',
         ];
     }
 
