@@ -39,7 +39,7 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
      */
     public function get(string $site_id): string
     {
-        $site = $this->getSite($site_id);
+        $site = $this->getSiteById($site_id);
 
         return $this->getClient()->getEnvSyncing($site->id);
     }
@@ -66,7 +66,7 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
      */
     public function enable(string $site_id): void
     {
-        $site = $this->getSite($site_id);
+        $site = $this->getSiteById($site_id);
 
         try {
             $this->getClient()->setEnvSyncing($site->id, true);
@@ -99,7 +99,7 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
      */
     public function disable(string $site_id): void
     {
-        $site = $this->getSite($site_id);
+        $site = $this->getSiteById($site_id);
 
         try {
             $this->getClient()->setEnvSyncing($site->id, false);

@@ -34,7 +34,7 @@ class ActivateCommand extends TerminusCommand implements RequestAwareInterface, 
      */
     public function activate(string $site_id): void
     {
-        $site = $this->getSite($site_id);
+        $site = $this->getSiteById($site_id);
 
         try {
             $this->getClient()->activate($site->id);

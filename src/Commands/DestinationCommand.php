@@ -40,9 +40,9 @@ class DestinationCommand extends TerminusCommand implements RequestAwareInterfac
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function destination(string $site_id, string $destination = null): ?string
+    public function destination(string $site_id, ?string $destination = null): ?string
     {
-        $site = $this->getSite($site_id);
+        $site = $this->getSiteById($site_id);
 
         if (null === $destination) {
             return $this->getClient()->getDestination($site->id);
