@@ -40,9 +40,9 @@ class FrequencyCommand extends TerminusCommand implements RequestAwareInterface,
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function frequency(string $site_id, string $frequency = null): ?string
+    public function frequency(string $site_id, ?string $frequency = null): ?string
     {
-        $site = $this->getSite($site_id);
+        $site = $this->getSiteById($site_id);
 
         if (null === $frequency) {
             return $this->getClient()->getFrequency($site->id);

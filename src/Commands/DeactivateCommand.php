@@ -34,7 +34,7 @@ class DeactivateCommand extends TerminusCommand implements RequestAwareInterface
      */
     public function deactivate(string $site_id): void
     {
-        $site = $this->getSite($site_id);
+        $site = $this->getSiteById($site_id);
 
         try {
             $this->getClient()->deactivate($site->id);
