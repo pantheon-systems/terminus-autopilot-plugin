@@ -39,7 +39,7 @@ jobs:
       - checkout_build
     steps:
       - name: Download repo content from artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: full-workspace
       - name: PHPCompatibility
@@ -80,7 +80,7 @@ jobs:
           coverage: pcov
           ini-values: error_reporting=E_ALL
       - name: Download repo content from artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: full-workspace
       - name: Install Terminus
