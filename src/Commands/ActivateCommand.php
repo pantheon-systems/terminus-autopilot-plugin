@@ -45,6 +45,6 @@ class ActivateCommand extends TerminusCommand implements RequestAwareInterface, 
             );
         }
 
-        $this->log()->notice('Autopilot is activated.');
+        $this->log()->success('Autopilot is activated.');
     }
 }

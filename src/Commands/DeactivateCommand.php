@@ -45,6 +45,6 @@ class DeactivateCommand extends TerminusCommand implements RequestAwareInterface
             );
         }
 
-        $this->log()->notice('Autopilot is deactivated.');
+        $this->log()->success('Autopilot is deactivated.');
     }
 }
