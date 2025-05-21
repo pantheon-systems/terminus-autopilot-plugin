@@ -1,6 +1,7 @@
-name: Terminus 3.x Plugins Test & Build
+name: Test & Build
 on:
   push:
+  pull_request:
   schedule:
     - cron: '0 6 * * *'
   workflow_dispatch:
