@@ -55,14 +55,15 @@ jobs:
     strategy:
       matrix:
         operating-system: [ 'macos-latest' ]
-        php-versions: [ '7.4', '8.1' ]
+        php-versions: [ '7.4', '8.3' ]
+        terminus-versions: ['3.6.2', '4.0.1']
       max-parallel: 3
     env:
       TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
       TERMINUS_SITE: ${{ secrets.TERMINUS_SITE }}
       TERMINUS_ORG: ${{ secrets.TERMINUS_ORG }}
       TERMINUS_ALLOW_UNSUPPORTED_NEWER_PHP: true
-      TERMINUS_VERSION: 3.1.1
+      TERMINUS_VERSION: ${{ matrix.terminus-versions }}
     needs:
       - checkout_build
       - phpcompatibility
