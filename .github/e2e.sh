@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 VCS_REF=$(git rev-parse --short HEAD)
 DATE_TAG=$(TZ=UTC date +%Y-%m-%d_%H.%M)
 SCRIPT=$(readlink -f $0)
@@ -26,7 +28,7 @@ echo "===================================================="
 
 echo "Creating Site: ${SITENAME}"
 ## If exists is empty, create the site
-terminus site:create "${SITENAME}" "${SITENAME}" drupal-composer-managed --org=${TERMINUS_ORG}
+terminus site:create "${SITENAME}" "${SITENAME}" drupal-11-composer-managed --org=${TERMINUS_ORG}
 echo "===================================================="
 
 wait 30
