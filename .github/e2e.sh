@@ -25,7 +25,6 @@ echo "===================================================="
 
 echo "Installing Plugin: "
 terminus self:plugin:install ${ROOT_DIR}
-echo "===================================================="
 
 if terminus site:info "${SITENAME}" 2&>/dev/null; then
   echo "Site ${SITENAME} already exists. Deleting it..."
@@ -33,46 +32,34 @@ if terminus site:info "${SITENAME}" 2&>/dev/null; then
 fi
 
 echo "Creating Site: ${SITENAME}"
-terminus site:create "${SITENAME}" "${SITENAME}" drupal-11-composer-managed --org=${TERMINUS_ORG}
-echo "===================================================="
-
-wait 30
-
+terminus site:create "${SITENAME}" "${SITENAME}" wordpress --org=${TERMINUS_ORG}
 echo "Installing Site: ${SITENAME}"
-## Wipe the site Database and install basic umami
-terminus drush ${SITENAME}.dev -- \
-     site:install --account-name=admin \
-       --site-name=${SITENAME}  \
-       --locale=en --yes demo_umami
-echo "===================================================="
+terminus remote:wp "${SITENAME}".dev -- core install \
+        --title="$SITENAME" \
+        --admin_user=admin \
+        --admin_email=admin@mysite.com \
+        --skip-email
+
+terminus remote:wp "${SITENAME}".dev -- option update permalink_structure '/%postname%/'
 
 echo "Setting Connection: ${SITENAME}"
 ## set the connection of the site to GIT mode
 terminus connection:set ${SITENAME}.dev git
-echo "===================================================="
 
 echo "Activating Autopilot: ${SITENAME}"
 terminus site:autopilot:activate "$SITENAME"
-echo "===================================================="
 
-## export the URL for the dev environment
-export SITE_DEV=https://$(terminus env:info "$SITENAME.dev" --format=json --field=domain)
-echo "Loading Homepage: ${SITE_DEV}"
-## curl the page once to make sure you initialize all the database tables
-curl $SITE_DEV &> /dev/null
-echo "===================================================="
-
-echo "Enable Env sync: ${SITENAME}"
+echo "Enable Env sync"
 terminus site:autopilot:env-sync:enable "${SITENAME}"
-echo "===================================================="
 
-echo "Enable Env sync: ${SITENAME}"
+echo "Setting daily frequency"
 terminus site:autopilot:frequency "${SITENAME}" daily
-echo "===================================================="
 
-echo "Setting Frequency: ${SITENAME}"
+echo "Setting Deployment Destination"
 terminus site:autopilot:deployment-destination "${SITENAME}" test
-echo "===================================================="
 
-echo "Deleting test site: ${SITENAME}"
+echo "Deactivating Autopilot"
+terminus site:autopilot:deactivate "${SITENAME}"
+
+echo "Deleting test site"
 terminus site:delete "${SITENAME}" --yes --quiet
