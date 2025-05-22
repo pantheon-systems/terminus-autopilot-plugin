@@ -79,10 +79,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-public-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Download repo content from artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: full-workspace
       - name: Install Terminus
         uses: pantheon-systems/terminus-github-actions@main
         with:
