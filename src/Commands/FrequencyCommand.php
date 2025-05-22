@@ -57,7 +57,7 @@ class FrequencyCommand extends TerminusCommand implements RequestAwareInterface,
             );
         }
 
-        $this->log()->notice(
+        $this->log()->success(
             'Autopilot frequency updated to {frequency}.',
             ['frequency' => $frequency]
         );
