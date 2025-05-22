@@ -77,7 +77,7 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
             );
         }
 
-        $this->log()->success('Autopilot environment syncing is enabled.');
+        $this->log()->notice('Autopilot environment syncing is enabled.');
     }
 
     /**
@@ -110,6 +110,6 @@ class EnvSyncingCommand extends TerminusCommand implements RequestAwareInterface
             );
         }
 
-        $this->log()->success('Autopilot environment syncing is disabled.');
+        $this->log()->notice('Autopilot environment syncing is disabled.');
     }
 }

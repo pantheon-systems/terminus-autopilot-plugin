@@ -57,7 +57,7 @@ class DestinationCommand extends TerminusCommand implements RequestAwareInterfac
             );
         }
 
-        $this->log()->success(
+        $this->log()->notice(
             'Autopilot deployment destination updated to {destination}.',
             ['destination' => $destination]
         );
