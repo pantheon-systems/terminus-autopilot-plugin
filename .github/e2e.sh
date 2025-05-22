@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
-set -x
-
 
 VCS_REF=$(git rev-parse --short HEAD)
 DATE_TAG=$(TZ=UTC date +%Y-%m-%d_%H.%M)
