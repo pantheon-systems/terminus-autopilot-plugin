@@ -1,6 +1,9 @@
 name: Test & Build
 on:
   push:
+    branches:
+      - main
+      - 'refs/tags/*'
   pull_request:
   schedule:
     - cron: '0 6 * * *'
