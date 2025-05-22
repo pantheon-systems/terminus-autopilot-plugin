@@ -86,7 +86,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh-public-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Install Terminus
         uses: pantheon-systems/terminus-github-actions@main
         with:
