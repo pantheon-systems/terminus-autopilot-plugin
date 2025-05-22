@@ -37,8 +37,6 @@ terminus remote:wp "${SITENAME}".dev -- core install \
         --admin_email=admin@mysite.com \
         --skip-email
 
-terminus remote:wp "${SITENAME}".dev -- option update permalink_structure '/%postname%/'
-
 echo "Setting Connection: ${SITENAME}"
 ## set the connection of the site to GIT mode
 terminus connection:set ${SITENAME}.dev git
