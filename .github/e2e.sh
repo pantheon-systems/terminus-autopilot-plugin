@@ -14,7 +14,6 @@ VERSION_SAFE="${VERSION//./}"
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
 SITENAME="${VERSION_SAFE}-php${PHP_VERSION//./}-${VCS_REF}"
 
-terminus site:delete "${SITENAME}" --yes --quiet &> /dev/null
 
 echo "===================================================="
 echo "Root Dir: ${ROOT_DIR}"
@@ -28,8 +27,12 @@ echo "Installing Plugin: "
 terminus self:plugin:install ${ROOT_DIR}
 echo "===================================================="
 
+if terminus site:info "${SITENAME}" 2&>/dev/null; then
+  echo "Site ${SITENAME} already exists. Deleting it..."
+  terminus site:delete "${SITENAME}" --yes --quiet &> /dev/null
+fi
+
 echo "Creating Site: ${SITENAME}"
-## If exists is empty, create the site
 terminus site:create "${SITENAME}" "${SITENAME}" drupal-11-composer-managed --org=${TERMINUS_ORG}
 echo "===================================================="
 
@@ -49,21 +52,14 @@ terminus connection:set ${SITENAME}.dev git
 echo "===================================================="
 
 echo "Activating Autopilot: ${SITENAME}"
-terminus site:autopilot:activate $SITENAME
+terminus site:autopilot:activate "$SITENAME"
 echo "===================================================="
 
-## set the site's plan to basic paid plan
-## terminus plan:set $SITENAME plan-basic_small-contract-annual-1
 ## export the URL for the dev environment
-export SITE_DEV=https://`terminus env:info $SITENAME.dev --format=json --field=domain`
+export SITE_DEV=https://$(terminus env:info "$SITENAME.dev" --format=json --field=domain)
 echo "Loading Homepage: ${SITE_DEV}"
 ## curl the page once to make sure you initialize all the database tables
 curl $SITE_DEV &> /dev/null
-echo "===================================================="
-
-echo "Deploy Env's:: ${SITENAME}"
-## Deploy the dev site to test & live
-terminus env:deploy ${SITENAME}.test && terminus env:deploy ${SITENAME}.live
 echo "===================================================="
 
 echo "Enable Env sync: ${SITENAME}"
