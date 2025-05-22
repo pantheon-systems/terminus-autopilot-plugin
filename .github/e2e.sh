@@ -12,7 +12,7 @@ ROOT_DIR=$(dirname $SCRIPTPATH)
 VERSION=$(cat .version)
 VERSION_SAFE="${VERSION//./}"
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
-SITENAME="${VERSION_SAFE}-php${PHP_VERSION//./}-${VCS_REF}"
+SITENAME="${VERSION_SAFE}-php${PHP_VERSION//./}-t${TERMINUS_VERSION//./}-${VCS_REF}"
 
 
 echo "===================================================="
