@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 VCS_REF=$(git rev-parse --short HEAD)
 DATE_TAG=$(TZ=UTC date +%Y-%m-%d_%H.%M)
@@ -8,9 +9,7 @@ ROOT_DIR=$(dirname $SCRIPTPATH)
 VERSION=$(cat .version)
 VERSION_SAFE="${VERSION//./}"
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
-SITENAME="${VERSION_SAFE}-php${PHP_VERSION//./}-${VCS_REF}"
-
-terminus site:delete "${SITENAME}" --yes --quiet &> /dev/null
+SITENAME="ci-${VERSION_SAFE}-php${PHP_VERSION//./}-t${TERMINUS_VERSION//./}-${VCS_REF}"
 
 echo "===================================================="
 echo "Root Dir: ${ROOT_DIR}"
@@ -22,57 +21,39 @@ echo "===================================================="
 
 echo "Installing Plugin: "
 terminus self:plugin:install ${ROOT_DIR}
-echo "===================================================="
+
+if terminus site:info "${SITENAME}" 2&>/dev/null; then
+  echo "Site ${SITENAME} already exists. Deleting it..."
+  terminus site:delete "${SITENAME}" --yes --quiet &> /dev/null
+fi
 
 echo "Creating Site: ${SITENAME}"
-## If exists is empty, create the site
-terminus site:create "${SITENAME}" "${SITENAME}" drupal-composer-managed --org=${TERMINUS_ORG}
-echo "===================================================="
-
-wait 30
-
+terminus site:create "${SITENAME}" "${SITENAME}" wordpress --org=${TERMINUS_ORG}
 echo "Installing Site: ${SITENAME}"
-## Wipe the site Database and install basic umami
-terminus drush ${SITENAME}.dev -- \
-     site:install --account-name=admin \
-       --site-name=${SITENAME}  \
-       --locale=en --yes demo_umami
-echo "===================================================="
+terminus remote:wp "${SITENAME}".dev -- core install \
+        --title="$SITENAME" \
+        --admin_user=admin \
+        --admin_email=admin@mysite.com \
+        --skip-email
 
 echo "Setting Connection: ${SITENAME}"
 ## set the connection of the site to GIT mode
 terminus connection:set ${SITENAME}.dev git
-echo "===================================================="
 
 echo "Activating Autopilot: ${SITENAME}"
-terminus site:autopilot:activate $SITENAME
-echo "===================================================="
+terminus site:autopilot:activate "$SITENAME"
 
-## set the site's plan to basic paid plan
-## terminus plan:set $SITENAME plan-basic_small-contract-annual-1
-## export the URL for the dev environment
-export SITE_DEV=https://`terminus env:info $SITENAME.dev --format=json --field=domain`
-echo "Loading Homepage: ${SITE_DEV}"
-## curl the page once to make sure you initialize all the database tables
-curl $SITE_DEV &> /dev/null
-echo "===================================================="
-
-echo "Deploy Env's:: ${SITENAME}"
-## Deploy the dev site to test & live
-terminus env:deploy ${SITENAME}.test && terminus env:deploy ${SITENAME}.live
-echo "===================================================="
-
-echo "Enable Env sync: ${SITENAME}"
+echo "Enable Env sync"
 terminus site:autopilot:env-sync:enable "${SITENAME}"
-echo "===================================================="
 
-echo "Enable Env sync: ${SITENAME}"
-terminus site:autopilot:frequency "${SITENAME}" daily
-echo "===================================================="
+echo "Setting monthly frequency"
+terminus site:autopilot:frequency "${SITENAME}" monthly
 
-echo "Setting Frequency: ${SITENAME}"
+echo "Setting Deployment Destination"
 terminus site:autopilot:deployment-destination "${SITENAME}" test
-echo "===================================================="
 
-echo "Deleting test site: ${SITENAME}"
+echo "Deactivating Autopilot"
+terminus site:autopilot:deactivate "${SITENAME}"
+
+echo "Deleting test site"
 terminus site:delete "${SITENAME}" --yes --quiet
