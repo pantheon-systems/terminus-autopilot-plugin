@@ -17,7 +17,7 @@ on:
 jobs:
   # Checkout in separate job because docker image is alpine based and checkout action doesn't work.
   checkout_build:
-    runs-on: ubuntu-latestan I
+    runs-on: ubuntu-latest
     name: Checkout & Lint
     steps:
       - name: Checkout
@@ -33,13 +33,15 @@ jobs:
   phpcompatibility:
     runs-on: ubuntu-latest
     name: PHP Compatibility
-    needs:
-      - checkout_build
     steps:
-      - name: Download repo content from artifact
-        uses: actions/download-artifact@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          name: full-workspace
+          php-version: '8.3'
+      - name: Full Composer Install
+        run: composer install
       - name: PHPCompatibility
         uses: pantheon-systems/phpcompatibility-action@v1
         with:
@@ -48,11 +50,11 @@ jobs:
 
   functional:
     runs-on: ${{ matrix.operating-system }}
-    name: Functional testing matrix - PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }}
+    name: Functional testing matrix - PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }} with Terminus ${{ matrix.terminus-versions }}
     if: ${{ github.repository_owner == 'pantheon-systems' }}
     strategy:
       matrix:
-        operating-system: [ 'macos-latest' ]
+        operating-system: [ 'ubuntu-latest' ]
         php-versions: [ '7.4', '8.3' ]
         terminus-versions: ['3.6.2', '4.0.1'] # TODO: Make this "latest" instead of 4
       max-parallel: 3
