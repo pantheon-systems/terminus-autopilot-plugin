@@ -52,8 +52,8 @@ terminus site:autopilot:activate "$SITENAME"
 echo "Enable Env sync"
 terminus site:autopilot:env-sync:enable "${SITENAME}"
 
-echo "Setting daily frequency"
-terminus site:autopilot:frequency "${SITENAME}" daily
+echo "Setting monthly frequency"
+terminus site:autopilot:frequency "${SITENAME}" monthly
 
 echo "Setting Deployment Destination"
 terminus site:autopilot:deployment-destination "${SITENAME}" test
