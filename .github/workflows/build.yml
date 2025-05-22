@@ -60,6 +60,9 @@ jobs:
         operating-system: [ 'ubuntu-latest' ]
         php-versions: [ '7.4', '8.3' ]
         terminus-versions: ['3.6.2', '4.0.1'] # TODO: Make this "latest" instead of 4
+        exclude:
+          - php-versions: [ '7.4' ]
+            terminus-versions: ['4.0.1']
       max-parallel: 3
     env:
       TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
