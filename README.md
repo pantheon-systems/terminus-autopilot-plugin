@@ -22,7 +22,7 @@ Review the [Autopilot Site Compatibility](https://pantheon.io/docs/guides/autopi
 Autopilot requires the following:
 
 - A site with Autopilot available
-- Terminus 3
+- Terminus 3 or 4
 
 ### Terminus Autopilot Plugin Functionality
 
