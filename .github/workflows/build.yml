@@ -18,10 +18,9 @@ on:
         required: true
         default: "0"
 jobs:
-  # Checkout in separate job because docker image is alpine based and checkout action doesn't work.
-  checkout_build:
+  lint-php:
     runs-on: ubuntu-latest
-    name: Checkout & Lint
+    name: Lint
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,6 +32,12 @@ jobs:
         run: composer install
       - name: Validate Code
         run: composer lint
+  lint-shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shellcheck
+        run: shellcheck .github/*.sh
   phpcompatibility:
     runs-on: ubuntu-latest
     name: PHP Compatibility
