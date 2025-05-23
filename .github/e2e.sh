@@ -51,6 +51,7 @@ terminus site:autopilot:frequency "${SITENAME}" monthly
 
 echo "Setting Deployment Destination"
 terminus site:autopilot:deployment-destination "${SITENAME}" test
+terminus site:autopilot:deployment-destination "${SITENAME}" none
 
 echo "Deactivating Autopilot"
 terminus site:autopilot:deactivate "${SITENAME}"
