@@ -22,7 +22,7 @@ Review the [Autopilot Site Compatibility](https://pantheon.io/docs/guides/autopi
 Autopilot requires the following:
 
 - A site with Autopilot available
-- Terminus 3
+- Terminus 3 or 4
 
 ### Terminus Autopilot Plugin Functionality
 
@@ -99,3 +99,8 @@ You can use the command below to set the frequency at which Autopilot runs. Vali
 - manual
 
 `site:autopilot:frequency {SITE_NAME|SITE_ID} {FREQUENCY}`
+
+## Development
+
+### Releases
+Releases are published using [autotag](https://github.com/autotag-dev/autotag), with a release published on each PR's merge to `main`. This project expects Autotag's [default scheme](https://github.com/autotag-dev/autotag). Releases can be skipped by adding `[ci skip]` or similar [magic keywords](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/skipping-workflow-runs) to the commit message.
