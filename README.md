@@ -99,3 +99,8 @@ You can use the command below to set the frequency at which Autopilot runs. Vali
 - manual
 
 `site:autopilot:frequency {SITE_NAME|SITE_ID} {FREQUENCY}`
+
+## Development
+
+### Releases
+Releases are published using [autotag](https://github.com/autotag-dev/autotag), with a release published on each PR's merge to `main`. This project expects Autotag's [default scheme](https://github.com/autotag-dev/autotag).
