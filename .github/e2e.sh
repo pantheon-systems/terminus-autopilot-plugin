@@ -2,18 +2,14 @@
 set -euo pipefail
 
 VCS_REF=$(git rev-parse --short HEAD)
-DATE_TAG=$(TZ=UTC date +%Y-%m-%d_%H.%M)
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=$(dirname $SCRIPT)
 ROOT_DIR=$(dirname $SCRIPTPATH)
-VERSION=$(cat .version)
-VERSION_SAFE="${VERSION//./}"
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
-SITENAME="ci-${VERSION_SAFE}-php${PHP_VERSION//./}-t${TERMINUS_VERSION//./}-${VCS_REF}"
+SITENAME="ci-php${PHP_VERSION//./}-t${TERMINUS_VERSION//./}-${VCS_REF}"ww
 
 echo "===================================================="
 echo "Root Dir: ${ROOT_DIR}"
-echo "Version: ${VERSION_SAFE}"
 echo "Testing Site: ${SITENAME}"
 echo "Terminus org: ${TERMINUS_ORG}"
 echo "Terminus version: ${TERMINUS_VERSION}"
