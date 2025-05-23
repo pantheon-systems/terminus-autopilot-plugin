@@ -6,7 +6,7 @@ SCRIPT=$(readlink -f $0)
 SCRIPTPATH=$(dirname $SCRIPT)
 ROOT_DIR=$(dirname $SCRIPTPATH)
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
-SITENAME="ci-php${PHP_VERSION//./}-t${TERMINUS_VERSION//./}-${VCS_REF}"ww
+SITENAME="ci-php${PHP_VERSION//./}-t${TERMINUS_VERSION//./}-${VCS_REF}"
 
 echo "===================================================="
 echo "Root Dir: ${ROOT_DIR}"
