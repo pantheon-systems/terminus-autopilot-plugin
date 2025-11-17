@@ -353,6 +353,6 @@ class Client
             return str_replace('hermes', 'pantheonapi', $config->get('host'));
         }
 
-        return 'api.pantheon.io';
+        return 'terminus.pantheon.io';
     }
 }
