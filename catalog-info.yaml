@@ -1,0 +1,12 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: terminus-autopilot-plugin
+  description: terminus-autopilot-plugin component
+  annotations:
+    github.com/project-slug: pantheon-systems/terminus-autopilot-plugin
+spec:
+  type: service
+  lifecycle: production
+  owner: developer-experience
