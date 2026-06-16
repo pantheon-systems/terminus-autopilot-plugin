@@ -23,7 +23,7 @@ jobs:
     name: Lint
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -35,7 +35,7 @@ jobs:
   lint-shell:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Shellcheck
         run: shellcheck .github/*.sh
   phpcompatibility:
@@ -43,7 +43,7 @@ jobs:
     name: PHP Compatibility
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -77,7 +77,7 @@ jobs:
       TERMINUS_VERSION: ${{ matrix.terminus-versions }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Setup PHP with PECL extension
         uses: shivammathur/setup-php@v2
         with:
@@ -88,7 +88,7 @@ jobs:
       - name: Full Composer Install
         run: composer install
       - name: Install SSH key
-        uses: webfactory/ssh-agent@v0.5.3
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Install Terminus
