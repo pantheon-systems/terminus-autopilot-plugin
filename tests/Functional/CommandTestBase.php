@@ -50,7 +50,7 @@ abstract class CommandTestBase extends TerminusTestBase
             [
                 'headers' => [
                     'Accept' => 'application/json',
-                    'Authorization' => null,
+                    'Authorization' => 'Bearer ',
                 ],
             ],
             $expected_request_options
