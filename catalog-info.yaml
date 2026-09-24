@@ -1,12 +1,14 @@
+# Managed by github-terraform — do not edit manually
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: terminus-autopilot-plugin
-  description: terminus-autopilot-plugin component
+  name: "terminus-autopilot-plugin"
+  description: "terminus-autopilot-plugin"
   annotations:
-    github.com/project-slug: pantheon-systems/terminus-autopilot-plugin
+    "backstage.io/techdocs-ref": "dir:docs/"
+    "github.com/project-slug": "pantheon-systems/terminus-autopilot-plugin"
 spec:
-  type: service
-  lifecycle: production
-  owner: developer-experience
+  type: "plugin"
+  lifecycle: "production"
+  owner: "developer-experience"
