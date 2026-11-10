@@ -103,4 +103,16 @@ You can use the command below to set the frequency at which Autopilot runs. Vali
 ## Development
 
 ### Releases
-Releases are published using [autotag](https://github.com/autotag-dev/autotag), with a release published on each PR's merge to `main`. This project expects Autotag's [default scheme](https://github.com/autotag-dev/autotag). Releases can be skipped by adding `[ci skip]` or similar [magic keywords](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/skipping-workflow-runs) to the commit message.
+Every merge to `main` is tagged and released automatically; see [DEPLOYMENT.md](DEPLOYMENT.md) for how releases work, how to skip one, and how to roll back.
+
+## Rollback
+
+**When:** a release of this plugin breaks users and a fix will take more than a few hours. Otherwise fix forward with the next patch tag.
+
+**Recover:** revert the bad change on `main` and tag the next patch version. Never delete or move a published tag. Add `[ci skip]` to merge messages until the revert lands, because merging to `main` auto-releases. Users who already installed the bad version can pin the last good one with `terminus self:plugin:install pantheon-systems/terminus-autopilot-plugin:<previous>`.
+
+**Verify:** a clean scratch install (commands in [DEPLOYMENT.md](DEPLOYMENT.md#how-to-confirm-it-deployed)) shows the intended version, and Packagist lists the fixed tag first.
+
+**Who to page:** the `developer-experience` team via `#ask-hosting`.
+
+Full procedure: [DEPLOYMENT.md](DEPLOYMENT.md#rollback).
