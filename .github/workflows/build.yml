@@ -17,6 +17,8 @@ on:
         description: Enable tmate debugging
         required: true
         default: "0"
+permissions:
+  contents: read
 jobs:
   lint-php:
     runs-on: ubuntu-latest
