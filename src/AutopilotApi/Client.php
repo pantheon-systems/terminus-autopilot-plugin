@@ -292,7 +292,7 @@ class Client
             [
                 'headers' => [
                     'Accept' => 'application/json',
-                    'Authorization' => $this->request->session()->get('session'),
+                    'Authorization' => sprintf('Bearer %s', $this->request->session()->get('session')),
                 ],
                 // Do not convert http errors to exceptions
                 'http_errors' => false,
@@ -351,6 +351,13 @@ class Client
 
         if ($config->get('host') && false !== strpos($config->get('host'), 'hermes.sandbox-')) {
             return str_replace('hermes', 'pantheonapi', $config->get('host'));
+        }
+
+        if (
+            $config->get('host')
+            && preg_match('/^[a-z0-9-]+\.sandbox-[a-z0-9-]+(\.[a-z0-9-]+)*\.pantheon\.io$/', $config->get('host'))
+        ) {
+            return $config->get('host');
         }
 
         return 'terminus.pantheon.io';
